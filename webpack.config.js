@@ -1,7 +1,5 @@
 const path = require('path');
 
-const URL_PATH = '/coffee-and-taste/';
-
 module.exports = {
   mode: 'development',
   entry: path.resolve(__dirname, 'src/index.jsx'),
@@ -46,10 +44,6 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
   devServer: {
-    // historyApiFallback: true, // * 이렇게 설정해봤는데, 새로고침하면 404 가 발생한다.
-    historyApiFallback: {
-      index: `${URL_PATH}index.html`,
-    },
-    publicPath: URL_PATH,
+    historyApiFallback: true,
   },
 };

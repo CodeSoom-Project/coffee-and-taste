@@ -1,7 +1,7 @@
 {
   "name": "coffee-and-taste",
   "version": "0.1.0",
-  "homepage": "https://jack-and-whoop.github.io/coffee-and-taste",
+  "homepage": "https://hdpyo.github.io/coffee-and-taste",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.9.0",

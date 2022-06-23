@@ -1,7 +1,10 @@
 import styled from '@emotion/styled';
 
 import { useSelector } from 'react-redux';
+
 import { Link } from 'react-router-dom';
+
+import { useState } from 'react';
 
 const CategoryContainerStyle = styled.div({
   margin: '0 auto',
@@ -10,12 +13,6 @@ const CategoryContainerStyle = styled.div({
   background: 'beige 100%',
   gridTemplateColumns: 'repeat(3, 1fr)',
   justifyItems: 'center',
-});
-
-const Category = styled.div({
-  padding: '20px 0',
-  fontSize: '1.8rem',
-  fontWeight: 'bold',
   '& a': {
     color: '#555555',
     textDecoration: 'none',
@@ -26,18 +23,30 @@ const Category = styled.div({
   },
 });
 
+const Category = styled.div(
+  {
+    padding: '20px 0',
+    fontSize: '1.8rem',
+    fontWeight: 'bold',
+  },
+  (props) => (props.active === 'active' ? { borderBottom: '4px solid green' } : { borderBottom: '' }
+  ),
+);
+
 export default function CategoryContainer() {
   const categories = useSelector((state) => state.categories);
+
+  const [activeCategory, setActiveCategory] = useState(1);
 
   return (
     <CategoryContainerStyle>
       {
         categories.map((category) => (
-          <Category key={category.id}>
-            <Link to={`/categories/${category.id}/menu-groups`}>
+          <Link to={`/categories/${category.id}/menu-groups`} className="category-link" onClick={() => setActiveCategory(category.id)}>
+            <Category key={category.id} id={category.id} active={activeCategory === category.id ? 'active' : ''}>
               {category.name}
-            </Link>
-          </Category>
+            </Category>
+          </Link>
         ))
       }
     </CategoryContainerStyle>

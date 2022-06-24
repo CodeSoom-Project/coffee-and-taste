@@ -23,27 +23,29 @@ const CategoryContainerStyle = styled.div({
   },
 });
 
-const Category = styled.div(
-  {
-    padding: '20px 0',
-    fontSize: '1.8rem',
-    fontWeight: 'bold',
-  },
-  (props) => (props.active === 'active' ? { borderBottom: '4px solid green' } : { borderBottom: '' }
-  ),
-);
+const Category = styled.div(({ active }) => ({
+  padding: '20px 0',
+  fontSize: '1.8rem',
+  fontWeight: 'bold',
+  ...(active && {
+    borderBottom: '4px solid green',
+  }),
+}));
 
 export default function CategoryContainer() {
   const categories = useSelector((state) => state.categories);
 
-  const [activeCategory, setActiveCategory] = useState(1);
+  const [activeCategory, setActiveCategory] = useState(0);
 
   return (
     <CategoryContainerStyle>
       {
         categories.map((category) => (
-          <Link to={`/categories/${category.id}/menu-groups`} className="category-link" onClick={() => setActiveCategory(category.id)}>
-            <Category key={category.id} id={category.id} active={activeCategory === category.id ? 'active' : ''}>
+          <Link
+            to={`/categories/${category.id}/menu-groups`}
+            onClick={() => setActiveCategory(category.id)}
+          >
+            <Category key={category.id} active={activeCategory === category.id}>
               {category.name}
             </Category>
           </Link>

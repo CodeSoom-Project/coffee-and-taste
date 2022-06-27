@@ -1,6 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { logout, requestLogin, updateLoginFields } from './store';
+import {
+  clearLoginFields, logout, requestLogin, updateLoginFields,
+} from './store';
 
 import LoginForm from './LoginForm';
 import LogoutForm from './LogoutForm';
@@ -21,6 +23,7 @@ export default function LoginFormContainer() {
 
   const handleClickLogout = () => {
     dispatch(logout());
+    dispatch(clearLoginFields());
   };
 
   return (

@@ -35,6 +35,7 @@ const SET_MENU = 'SET_MENU';
 const UPDATE_LOGIN_FIELDS = 'UPDATE_LOGIN_FIELDS';
 const SET_ACCESS_TOKEN = 'SET_ACCESS_TOKEN';
 const LOGOUT = 'LOGOUT';
+const CLEAR_LOGIN_FIELDS = 'CLEAR_LOGIN_FIELDS';
 
 export function updateLoginFields({ name, value }) {
   return {
@@ -53,6 +54,12 @@ export function setAccessToken(accessToken) {
 export function logout() {
   return {
     type: LOGOUT,
+  };
+}
+
+export function clearLoginFields() {
+  return {
+    type: CLEAR_LOGIN_FIELDS,
   };
 }
 
@@ -161,6 +168,17 @@ function reducer(state = initialState, action = {}) {
     return {
       ...state,
       accessToken: '',
+    };
+  }
+
+  if (action.type === CLEAR_LOGIN_FIELDS) {
+    return {
+      ...state,
+      loginFields: {
+        ...state.loginFields,
+        email: '',
+        password: '',
+      },
     };
   }
 

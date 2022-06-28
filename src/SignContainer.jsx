@@ -1,8 +1,10 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import styled from '@emotion/styled';
+
+import { clearLoginFields, logout } from './store';
 
 const List = styled.ul({
   display: 'flex',
@@ -24,7 +26,16 @@ const Item = styled.li({
 });
 
 export default function SignContainer() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const accessToken = useSelector((state) => state.accessToken);
+
+  const handleClickLogout = () => {
+    dispatch(logout());
+    dispatch(clearLoginFields());
+    navigate('/login');
+  };
 
   return (
     <div>
@@ -32,7 +43,7 @@ export default function SignContainer() {
         <Item>
           {
             accessToken ? (
-              <Link to="/logout">Logout</Link>
+              <Link to="/logout" onClick={handleClickLogout}>Logout</Link>
             ) : (
               <Link to="/login">Login</Link>
             )

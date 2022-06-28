@@ -1,5 +1,5 @@
 import {
-  BrowserRouter, Link, Route, Routes, useNavigate,
+  BrowserRouter, Link, Route, Routes,
 } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
@@ -15,9 +15,7 @@ import MenuListContainer from './MenuListContainer';
 import MenuDetailContainer from './MenuDetailContainer';
 import LoginPage from './LoginPage';
 
-import {
-  clearLoginFields, loadCategories, logout, selectCategory,
-} from './store';
+import { loadCategories, selectCategory } from './store';
 
 import { DEFAULT_SELECTED_CATEGORY_IS_NONE } from './constants';
 
@@ -57,15 +55,6 @@ const ContentContainer = styled.div({
   height: 'auto',
 });
 
-const LogoutPage = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  dispatch(logout());
-  dispatch(clearLoginFields());
-  navigate('/login');
-};
-
 export default function App() {
   const dispatch = useDispatch();
 
@@ -92,7 +81,6 @@ export default function App() {
         <ContentContainer>
           <Routes>
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/logout" element={<LogoutPage />} />
             <Route path="/categories/:categoryId/menu-groups" element={<MenuGroupContainer />} />
             <Route path="/menu-groups/:menuGroupId" element={<MenuListContainer />} />
             <Route path="/menu-groups/:menuGroupId/menus/:menuId" element={<MenuDetailContainer />} />

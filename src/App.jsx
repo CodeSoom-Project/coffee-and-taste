@@ -2,11 +2,13 @@ import {
   BrowserRouter, Link, Route, Routes, useNavigate,
 } from 'react-router-dom';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import styled from '@emotion/styled';
 
 import { useEffect } from 'react';
+
+import SignContainer from './SignContainer';
 import CategoryContainer from './CategoryContainer';
 import MenuGroupContainer from './MenuGroupContainer';
 import MenuListContainer from './MenuListContainer';
@@ -55,26 +57,6 @@ const ContentContainer = styled.div({
   height: 'auto',
 });
 
-const SignContainer = styled.div({
-  '& ul': {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    '& li': {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      lineHeight: '3rem',
-      minWidth: '6rem',
-      margin: '0 0.5rem',
-      '& a': {
-        color: '#555555',
-        textDecoration: 'none',
-      },
-    },
-  },
-});
-
 const LogoutPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -95,33 +77,10 @@ export default function App() {
     dispatch(selectCategory(DEFAULT_SELECTED_CATEGORY_IS_NONE));
   };
 
-  const accessToken = useSelector((state) => state.accessToken);
-
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Header>
-        <SignContainer>
-          <ul>
-            <li>
-              {
-                accessToken ? (
-                  <Link to="/logout">Logout</Link>
-                ) : (
-                  <Link to="/login">Login</Link>
-                )
-              }
-            </li>
-            <li>
-              {
-                accessToken ? (
-                  <h1>OOO 님</h1>
-                ) : (
-                  <Link to="/signUp">SignUp</Link>
-                )
-              }
-            </li>
-          </ul>
-        </SignContainer>
+        <SignContainer />
         <LogoContainer>
           <Link to="/" onClick={resetSelectedCategory}>
             <Logo src={logo} alt="coffee-and-taste logo" />

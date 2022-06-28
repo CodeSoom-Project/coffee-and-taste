@@ -1,4 +1,18 @@
+import { useDispatch } from 'react-redux';
+import { updateSignupFields } from './store';
+
 export default function SignUpContainer() {
+  const dispatch = useDispatch();
+
+  const handleChangeSignupFields = ({ name, value }) => {
+    dispatch(updateSignupFields({ name, value }));
+  };
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    handleChangeSignupFields({ name, value });
+  }
+
   return (
     <div>
       <h1>Sign Up</h1>
@@ -9,6 +23,7 @@ export default function SignUpContainer() {
           type="email"
           id="user-email"
           name="email"
+          onChange={handleChange}
         />
       </div>
       <div>
@@ -17,6 +32,7 @@ export default function SignUpContainer() {
           type="password"
           id="user-password"
           name="password"
+          onChange={handleChange}
         />
       </div>
       <div>
@@ -25,6 +41,7 @@ export default function SignUpContainer() {
           type="text"
           id="user-nickname"
           name="nickname"
+          onChange={handleChange}
         />
       </div>
       <div>
@@ -33,6 +50,7 @@ export default function SignUpContainer() {
           type="text"
           id="user-name"
           name="name"
+          onChange={handleChange}
         />
       </div>
       <div>
@@ -41,6 +59,7 @@ export default function SignUpContainer() {
           type="tel"
           id="user-phoneNumber"
           name="phoneNumber"
+          onChange={handleChange}
         />
       </div>
       <div>
@@ -49,6 +68,7 @@ export default function SignUpContainer() {
           type="date"
           id="user-birthDate"
           name="birthDate"
+          onChange={handleChange}
         />
       </div>
       <button type="button">Sign up</button>

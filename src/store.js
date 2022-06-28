@@ -24,6 +24,14 @@ const initialState = {
     password: '',
   },
   accessToken: '',
+  signUpFields: {
+    email: '',
+    password: '',
+    nickname: '',
+    name: '',
+    phoneNumber: '',
+    birthDate: '',
+  },
 };
 
 // - 액션 생성 함수 정의
@@ -36,10 +44,18 @@ const UPDATE_LOGIN_FIELDS = 'UPDATE_LOGIN_FIELDS';
 const SET_ACCESS_TOKEN = 'SET_ACCESS_TOKEN';
 const LOGOUT = 'LOGOUT';
 const CLEAR_LOGIN_FIELDS = 'CLEAR_LOGIN_FIELDS';
+const UPDATE_SIGNUP_FIELDS = 'UPDATE_SIGNUP_FIELDS';
 
 export function updateLoginFields({ name, value }) {
   return {
     type: UPDATE_LOGIN_FIELDS,
+    payload: { name, value },
+  };
+}
+
+export function updateSignupFields({ name, value }) {
+  return {
+    type: UPDATE_SIGNUP_FIELDS,
     payload: { name, value },
   };
 }
@@ -152,6 +168,17 @@ function reducer(state = initialState, action = {}) {
       ...state,
       loginFields: {
         ...state.loginFields,
+        [name]: value,
+      },
+    };
+  }
+
+  if (action.type === UPDATE_SIGNUP_FIELDS) {
+    const { name, value } = action.payload;
+    return {
+      ...state,
+      signUpFields: {
+        ...state.signUpFields,
         [name]: value,
       },
     };

@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 import { logger } from 'redux-logger';
 
 import {
-  fetchCategories, fetchMenu, fetchMenuGroups, fetchMenus, postLogin,
+  fetchCategories, fetchMenu, fetchMenuGroups, fetchMenus, postLogin, postSignUp,
 } from './services/api';
 
 import { DEFAULT_SELECTED_CATEGORY_IS_NONE } from './constants';
@@ -76,6 +76,24 @@ export function logout() {
 export function clearLoginFields() {
   return {
     type: CLEAR_LOGIN_FIELDS,
+  };
+}
+
+export function requestSignUp() {
+  return async (dispatch, getState) => {
+    const {
+      signUpFields: {
+        name, nickname, birthDate, email, password, phoneNumber,
+      },
+    } = getState();
+
+    try {
+      await postSignUp({
+        name, nickname, birthDate, email, password, phoneNumber,
+      });
+    } catch (e) {
+      // TODO : 에러 처리
+    }
   };
 }
 

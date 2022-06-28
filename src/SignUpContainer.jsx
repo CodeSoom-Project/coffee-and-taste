@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { updateSignupFields } from './store';
+import { requestSignUp, updateSignupFields } from './store';
 
 export default function SignUpContainer() {
   const dispatch = useDispatch();
@@ -11,6 +11,10 @@ export default function SignUpContainer() {
   function handleChange(event) {
     const { name, value } = event.target;
     handleChangeSignupFields({ name, value });
+  }
+
+  function handleSubmitSignup() {
+    dispatch(requestSignUp());
   }
 
   return (
@@ -71,7 +75,7 @@ export default function SignUpContainer() {
           onChange={handleChange}
         />
       </div>
-      <button type="button">Sign up</button>
+      <button type="button" onClick={handleSubmitSignup}>Sign up</button>
     </div>
   );
 }

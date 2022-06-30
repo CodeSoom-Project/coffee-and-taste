@@ -23,6 +23,25 @@ export async function fetchMenu(menuId) {
   return fetchData(`${BASE_URL}/menus/${menuId}`);
 }
 
+// TODO : API 가 업데이트되면 url, memberId 를 이용한 호출로 수정해야 함.
+// - 아직은 로그인한 memberId 를 서버로부터 호출할 수 없다.
+// - 따라서 테스트를 위해 memberId 를 1로 고정했다.
+// export async function fetchCart({ accessToken, memberId }) {
+// const url = `${BASE_URL}/members/${memberId}/cart`;
+export async function fetchCart({ accessToken }) {
+  const url = `${BASE_URL}/members/1/cart`;
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
+  const data = await response.json();
+  return data;
+}
+
 export async function postSignUp({
   name, nickname, birthDate, email, password, phoneNumber,
 }) {

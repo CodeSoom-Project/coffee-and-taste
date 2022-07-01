@@ -2,7 +2,9 @@ import { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { loadCart, addCheckedCartItem, removeUncheckedCartItem } from './store';
+import {
+  loadCart, addCheckedCartItem, removeUncheckedCartItem, requestOrder,
+} from './store';
 
 export default function CartContainer() {
   const dispatch = useDispatch();
@@ -27,7 +29,7 @@ export default function CartContainer() {
   };
 
   const handleClickOrder = () => {
-    // TODO : 주문 api 요청
+    dispatch(requestOrder());
   };
 
   return (

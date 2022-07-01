@@ -8,7 +8,7 @@ import { logger } from 'redux-logger';
 
 import {
   fetchCart, fetchCategories, fetchMenu, fetchMenuGroups, fetchMenus,
-  postLogin, postSignUp,
+  postLogin, postOrder, postSignUp,
 } from './services/api';
 
 import { DEFAULT_SELECTED_CATEGORY_IS_NONE } from './constants';
@@ -51,6 +51,7 @@ const UPDATE_SIGNUP_FIELDS = 'UPDATE_SIGNUP_FIELDS';
 const SET_CART_MENUS = 'SET_CART_MENUS';
 const ADD_CHECKED_CART_ITEM = 'ADD_CHECKED_CART_ITEM';
 const REMOVE_UNCHECKED_CART_ITEM = 'REMOVE_UNCHECKED_CART_ITEM';
+const CLEAR_CHECKED_CART_ITEMS = 'CLEAR_CHECKED_CART_ITEMS';
 
 export function updateLoginFields({ name, value }) {
   return {
@@ -159,20 +160,6 @@ export function setCartMenus(cartMenus) {
   };
 }
 
-export function addCheckedCartItem(checkedMenuId) {
-  return {
-    type: ADD_CHECKED_CART_ITEM,
-    payload: { checkedMenuId },
-  };
-}
-
-export function removeUncheckedCartItem(uncheckedMenuId) {
-  return {
-    type: REMOVE_UNCHECKED_CART_ITEM,
-    payload: { uncheckedMenuId },
-  };
-}
-
 export function loadCategories() {
   return async (dispatch) => {
     const categories = await fetchCategories();
@@ -211,6 +198,41 @@ export function loadCart() {
     const data = await fetchCart({ accessToken });
 
     dispatch(setCartMenus(data.cartMenus));
+  };
+}
+
+export function addCheckedCartItem(checkedMenuId) {
+  return {
+    type: ADD_CHECKED_CART_ITEM,
+    payload: { checkedMenuId },
+  };
+}
+
+export function removeUncheckedCartItem(uncheckedMenuId) {
+  return {
+    type: REMOVE_UNCHECKED_CART_ITEM,
+    payload: { uncheckedMenuId },
+  };
+}
+
+export function clearCheckedCartItems() {
+  return {
+    type: CLEAR_CHECKED_CART_ITEMS,
+  };
+}
+
+export function requestOrder() {
+  return async (dispatch, getState) => {
+    const { accessToken, checkedCartItems } = getState();
+
+    try {
+      await postOrder({ accessToken, checkedCartItems });
+
+      dispatch(clearCheckedCartItems());
+      dispatch(loadCart());
+    } catch (e) {
+      // TODO : 에러 처리
+    }
   };
 }
 
@@ -321,6 +343,13 @@ function reducer(state = initialState, action = {}) {
       checkedCartItems: [
         ...state.checkedCartItems.filter((item) => item !== action.payload.uncheckedMenuId),
       ],
+    };
+  }
+
+  if (action.type === CLEAR_CHECKED_CART_ITEMS) {
+    return {
+      ...state,
+      checkedCartItems: [],
     };
   }
 

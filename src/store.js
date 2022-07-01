@@ -33,7 +33,7 @@ const initialState = {
     phoneNumber: '',
     birthDate: '',
   },
-  cart: [],
+  cartMenus: [],
 };
 
 // - 액션 생성 함수 정의
@@ -47,7 +47,7 @@ const SET_ACCESS_TOKEN = 'SET_ACCESS_TOKEN';
 const LOGOUT = 'LOGOUT';
 const CLEAR_LOGIN_FIELDS = 'CLEAR_LOGIN_FIELDS';
 const UPDATE_SIGNUP_FIELDS = 'UPDATE_SIGNUP_FIELDS';
-const SET_CART = 'SET_CART';
+const SET_CART_MENUS = 'SET_CART_MENUS';
 
 export function updateLoginFields({ name, value }) {
   return {
@@ -149,10 +149,10 @@ export function setMenu(menu) {
   };
 }
 
-export function setCart(cart) {
+export function setCartMenus(cartMenus) {
   return {
-    type: SET_CART,
-    payload: { cart },
+    type: SET_CART_MENUS,
+    payload: { cartMenus },
   };
 }
 
@@ -193,7 +193,7 @@ export function loadCart() {
     const { accessToken } = getState();
     const data = await fetchCart({ accessToken });
 
-    dispatch(setCart(data));
+    dispatch(setCartMenus(data.cartMenus));
   };
 }
 
@@ -282,10 +282,10 @@ function reducer(state = initialState, action = {}) {
     };
   }
 
-  if (action.type === SET_CART) {
+  if (action.type === SET_CART_MENUS) {
     return {
       ...state,
-      cart: action.payload.cart,
+      cartMenus: action.payload.cartMenus,
     };
   }
 

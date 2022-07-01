@@ -34,7 +34,7 @@ export async function fetchCart({ accessToken }) {
   });
 
   const data = await response.json();
-  return data.cartMenus;
+  return data;
 }
 
 export async function postSignUp({

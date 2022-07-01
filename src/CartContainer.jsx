@@ -18,35 +18,31 @@ export default function CartContainer() {
       <h1>Cart</h1>
       <hr />
       {
-        cartMenus.map((cartMenu) => {
-          const {
-            menu: {
-              englishName, imagePath, name, price, quantity,
-            },
-          } = cartMenu;
-
-          return (
-            <div>
-              <span>
-                메뉴 이름 :
-                {name}
-              </span>
-              <span>
-                영어 이름 :
-                {englishName}
-              </span>
-              <span>
-                가격 :
-                {price}
-              </span>
-              <img src={`https://coffee-and-taste.kro.kr${imagePath}`} alt={name} />
-              <span>
-                수량 :
-                {quantity}
-              </span>
-            </div>
-          );
-        })
+        cartMenus.map(({
+          menu: {
+            name, englishName, price, imagePath,
+          }, quantity,
+        }) => (
+          <div>
+            <span>
+              메뉴 이름 :
+              {name}
+            </span>
+            <span>
+              영어 이름 :
+              {englishName}
+            </span>
+            <span>
+              가격 :
+              {price}
+            </span>
+            <span>
+              수량 :
+              {quantity}
+            </span>
+            <img src={`https://coffee-and-taste.kro.kr${imagePath}`} alt={name} />
+          </div>
+        ))
       }
     </div>
   );

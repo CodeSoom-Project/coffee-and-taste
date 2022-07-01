@@ -34,6 +34,7 @@ const initialState = {
     birthDate: '',
   },
   cartMenus: [],
+  checkedCartItems: [],
 };
 
 // - 액션 생성 함수 정의
@@ -48,6 +49,8 @@ const LOGOUT = 'LOGOUT';
 const CLEAR_LOGIN_FIELDS = 'CLEAR_LOGIN_FIELDS';
 const UPDATE_SIGNUP_FIELDS = 'UPDATE_SIGNUP_FIELDS';
 const SET_CART_MENUS = 'SET_CART_MENUS';
+const ADD_CHECKED_CART_ITEM = 'ADD_CHECKED_CART_ITEM';
+const REMOVE_UNCHECKED_CART_ITEM = 'REMOVE_UNCHECKED_CART_ITEM';
 
 export function updateLoginFields({ name, value }) {
   return {
@@ -153,6 +156,20 @@ export function setCartMenus(cartMenus) {
   return {
     type: SET_CART_MENUS,
     payload: { cartMenus },
+  };
+}
+
+export function addCheckedCartItem(checkedMenuId) {
+  return {
+    type: ADD_CHECKED_CART_ITEM,
+    payload: { checkedMenuId },
+  };
+}
+
+export function removeUncheckedCartItem(uncheckedMenuId) {
+  return {
+    type: REMOVE_UNCHECKED_CART_ITEM,
+    payload: { uncheckedMenuId },
   };
 }
 
@@ -286,6 +303,24 @@ function reducer(state = initialState, action = {}) {
     return {
       ...state,
       cartMenus: action.payload.cartMenus,
+    };
+  }
+
+  if (action.type === ADD_CHECKED_CART_ITEM) {
+    return {
+      ...state,
+      checkedCartItems: [
+        ...state.checkedCartItems, action.payload.checkedMenuId,
+      ],
+    };
+  }
+
+  if (action.type === REMOVE_UNCHECKED_CART_ITEM) {
+    return {
+      ...state,
+      checkedCartItems: [
+        ...state.checkedCartItems.filter((item) => item !== action.payload.uncheckedMenuId),
+      ],
     };
   }
 

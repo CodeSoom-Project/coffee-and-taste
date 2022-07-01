@@ -9,7 +9,7 @@ export default function CartContainer() {
 
   useEffect(() => {
     dispatch(loadCart());
-  });
+  }, []);
 
   const cartMenus = useSelector((state) => state.cartMenus);
 

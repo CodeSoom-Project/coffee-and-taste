@@ -114,7 +114,7 @@ const OrderButton = styled.button({
 });
 
 export default function Cart({
-  cartMenus, onChange, onClick, increaseQuantityOne, decreaseQuantityOne,
+  cartMenus, onChange, onClick, increaseQuantityOne, decreaseQuantityOne, updateItemQuantity,
 }) {
   const handleChange = (event) => {
     const { checked, value } = event.target;
@@ -163,7 +163,7 @@ export default function Cart({
                     <BsPlusCircleFill onClick={() => increaseQuantityOne(id)} cursor="pointer" />
                   </li>
                   <li>
-                    <button type="button">변경</button>
+                    <button type="button" onClick={() => updateItemQuantity(id)}>변경</button>
                   </li>
                 </ItemQuantityUl>
               </CartItemInfo>

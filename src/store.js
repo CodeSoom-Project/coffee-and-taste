@@ -8,7 +8,7 @@ import { logger } from 'redux-logger';
 
 import {
   fetchCart, fetchCategories, fetchMenu, fetchMenuGroups, fetchMenus,
-  postLogin, postSignUp, postAddToCart, postOrder,
+  postLogin, postSignUp, postAddToCart, postOrder, patchCartItemQuantity,
 } from './services/api';
 
 import { saveItem } from './services/localStorage';
@@ -287,6 +287,20 @@ export function cartMenuQuantityMinusOne(menuId) {
   return {
     type: CART_MENU_QUANTITY_MINUS_ONE,
     payload: { menuId },
+  };
+}
+
+export function requestUpdateCartItemQuantity(menuId) {
+  return async (dispatch, getState) => {
+    const { accessToken, cartMenus } = getState();
+
+    const { quantity } = cartMenus.find((item) => item.id === menuId);
+
+    try {
+      await patchCartItemQuantity({ accessToken, menuId, quantity });
+    } catch (err) {
+      // TODO : 에러 처리
+    }
   };
 }
 

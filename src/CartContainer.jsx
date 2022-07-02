@@ -9,6 +9,7 @@ import {
   requestOrder,
   cartMenuQuantityPlusOne,
   cartMenuQuantityMinusOne,
+  requestUpdateCartItemQuantity,
 } from './store';
 
 import Cart from './Cart';
@@ -46,6 +47,11 @@ export default function CartContainer() {
     dispatch(cartMenuQuantityMinusOne(menuId));
   };
 
+  const handleClickUpdateItemQuantity = (menuId) => {
+    // TODO : 특정 menuId 와 해당 menuId 의 quantity 를 전달하여 수량 업데이트 요청하기
+    dispatch(requestUpdateCartItemQuantity(menuId));
+  };
+
   if (cartMenus.length === 0) {
     return (
       <div>
@@ -63,6 +69,7 @@ export default function CartContainer() {
       onClick={handleClickOrder}
       increaseQuantityOne={handleClickQuantityPlusOne}
       decreaseQuantityOne={handleClickQuantityMinusOne}
+      updateItemQuantity={handleClickUpdateItemQuantity}
     />
   );
 }

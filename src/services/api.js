@@ -100,3 +100,18 @@ export async function postOrder({ accessToken, checkedCartItems }) {
   const data = await response.json();
   return data;
 }
+
+export async function patchCartItemQuantity({ accessToken, menuId, quantity }) {
+  const url = `${BASE_URL}/cart/cart-menus/${menuId}`;
+  const response = await fetch(url, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify({ quantity }),
+  });
+
+  const data = await response.json();
+  return data;
+}

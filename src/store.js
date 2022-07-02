@@ -58,6 +58,8 @@ const CLEAR_CHECKED_CART_ITEMS = 'CLEAR_CHECKED_CART_ITEMS';
 const MENU_QUANTITY_PLUS_ONE = 'MENU_QUANTITY_PLUS_ONE';
 const MENU_QUANTITY_MINUS_ONE = 'MENU_QUANTITY_MINUS_ONE';
 const INITIALIZE_MENU_QUANTITY = 'INITIALIZE_MENU_QUANTITY';
+const CART_MENU_QUANTITY_PLUS_ONE = 'CART_MENU_QUANTITY_PLUS_ONE';
+const CART_MENU_QUANTITY_MINUS_ONE = 'CART_MENU_QUANTITY_MINUS_ONE';
 
 export function updateLoginFields({ name, value }) {
   return {
@@ -274,6 +276,20 @@ export function requestAddToCart() {
   };
 }
 
+export function cartMenuQuantityPlusOne(menuId) {
+  return {
+    type: CART_MENU_QUANTITY_PLUS_ONE,
+    payload: { menuId },
+  };
+}
+
+export function cartMenuQuantityMinusOne(menuId) {
+  return {
+    type: CART_MENU_QUANTITY_MINUS_ONE,
+    payload: { menuId },
+  };
+}
+
 // - 리듀서
 function reducer(state = initialState, action = {}) {
   if (action.type === UPDATE_LOGIN_FIELDS) {
@@ -409,6 +425,32 @@ function reducer(state = initialState, action = {}) {
     return {
       ...state,
       menuQuantity: 1,
+    };
+  }
+
+  if (action.type === CART_MENU_QUANTITY_PLUS_ONE) {
+    const { menuId } = action.payload;
+    return {
+      ...state,
+      cartMenus: state.cartMenus.map((menu) => {
+        if (menu.id === menuId) {
+          return ({ ...menu, quantity: menu.quantity + 1 });
+        }
+        return menu;
+      }),
+    };
+  }
+
+  if (action.type === CART_MENU_QUANTITY_MINUS_ONE) {
+    const { menuId } = action.payload;
+    return {
+      ...state,
+      cartMenus: state.cartMenus.map((menu) => {
+        if (menu.id === menuId) {
+          return ({ ...menu, quantity: menu.quantity - 1 });
+        }
+        return menu;
+      }),
     };
   }
 

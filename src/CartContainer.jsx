@@ -3,7 +3,12 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
-  loadCart, addCheckedCartItem, removeUncheckedCartItem, requestOrder,
+  loadCart,
+  addCheckedCartItem,
+  removeUncheckedCartItem,
+  requestOrder,
+  cartMenuQuantityPlusOne,
+  cartMenuQuantityMinusOne,
 } from './store';
 
 import Cart from './Cart';
@@ -33,6 +38,14 @@ export default function CartContainer() {
     dispatch(requestOrder());
   };
 
+  const handleClickQuantityPlusOne = (menuId) => {
+    dispatch(cartMenuQuantityPlusOne(menuId));
+  };
+
+  const handleClickQuantityMinusOne = (menuId) => {
+    dispatch(cartMenuQuantityMinusOne(menuId));
+  };
+
   if (cartMenus.length === 0) {
     return (
       <div>
@@ -48,6 +61,8 @@ export default function CartContainer() {
       cartMenus={cartMenus}
       onChange={handleChange}
       onClick={handleClickOrder}
+      increaseQuantityOne={handleClickQuantityPlusOne}
+      decreaseQuantityOne={handleClickQuantityMinusOne}
     />
   );
 }

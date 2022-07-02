@@ -99,7 +99,9 @@ const OrderButton = styled.div({
   cursor: 'pointer',
 });
 
-export default function Cart({ cartMenus, onChange, onClick }) {
+export default function Cart({
+  cartMenus, onChange, onClick, increaseQuantityOne, decreaseQuantityOne,
+}) {
   const handleChange = (event) => {
     const { checked, value } = event.target;
     onChange({ checked, value });
@@ -136,10 +138,14 @@ export default function Cart({ cartMenus, onChange, onClick }) {
                   {price ? price.toLocaleString('ko-KR') : null}
                   원
                 </ItemPrice>
-                <ItemQuantityUl>
-                  <li><BsFillDashCircleFill cursor="pointer" /></li>
+                <ItemQuantityUl id={id}>
+                  <li>
+                    <BsFillDashCircleFill onClick={() => decreaseQuantityOne(id)} cursor="pointer" />
+                  </li>
                   <li>{quantity}</li>
-                  <li><BsPlusCircleFill cursor="pointer" /></li>
+                  <li>
+                    <BsPlusCircleFill onClick={() => increaseQuantityOne(id)} cursor="pointer" />
+                  </li>
                 </ItemQuantityUl>
               </CartItemInfo>
             </CartItem>

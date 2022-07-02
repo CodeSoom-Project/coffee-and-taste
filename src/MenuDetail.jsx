@@ -1,10 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 
+import { useEffect } from 'react';
+
 import styled from '@emotion/styled';
 
 import { BsFillDashCircleFill, BsPlusCircleFill } from 'react-icons/bs';
 
-import { menuQuantityMinusOne, menuQuantityPlusOne } from './store';
+import { initializeMenuQuantity, menuQuantityMinusOne, menuQuantityPlusOne } from './store';
 
 const MenuImage = styled.div(
   ({ url }) => ({
@@ -73,6 +75,10 @@ export default function MenuDetail({
   const dispatch = useDispatch();
 
   const menuQuantity = useSelector((state) => state.menuQuantity);
+
+  useEffect(() => {
+    dispatch(initializeMenuQuantity());
+  }, []);
 
   const handleClickAddToCart = () => {
     // TODO : 클릭한 메뉴를 장바구니에 담는 api 호출하기

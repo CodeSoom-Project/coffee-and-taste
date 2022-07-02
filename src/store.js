@@ -461,6 +461,10 @@ function reducer(state = initialState, action = {}) {
       ...state,
       cartMenus: state.cartMenus.map((menu) => {
         if (menu.id === menuId) {
+          if ((menu.quantity - 1) < 1) {
+            alert('수량은 1보다 작을 수 없습니다.');
+            return menu;
+          }
           return ({ ...menu, quantity: menu.quantity - 1 });
         }
         return menu;

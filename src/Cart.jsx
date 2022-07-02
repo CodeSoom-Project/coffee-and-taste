@@ -69,13 +69,29 @@ const ItemPrice = styled.h3({
 });
 
 const ItemQuantityUl = styled.ul({
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
   listStyle: 'none',
+  width: '100%',
+  display: 'grid',
+  gridTemplateColumns: 'repeat(3, 1fr) 3fr',
+  alignContent: 'center',
   '& li': {
-    fontSize: '1.5rem',
-    paddingRight: '1rem',
+    display: 'grid',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: '1.7rem',
+    lineHeight: '3rem',
+    '& button': {
+      width: '5rem',
+      height: '2rem',
+      color: 'white',
+      borderRadius: '30px',
+      backgroundColor: '#006633',
+      outline: 'none',
+      border: 'none',
+      cursor: 'pointer',
+      fontSize: '1rem',
+      lineHeight: '1.5rem',
+    },
   },
 });
 
@@ -85,17 +101,15 @@ const OrderDiv = styled.div({
   alignItems: 'center',
 });
 
-const OrderButton = styled.div({
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
+const OrderButton = styled.button({
   width: '70%',
-  height: '2.5rem',
+  height: '3rem',
   fontSize: '1.3rem',
   color: 'white',
   borderRadius: '30px',
   backgroundColor: '#006633',
-  padding: '0.5rem',
+  outline: 'none',
+  border: 'none',
   cursor: 'pointer',
 });
 
@@ -142,9 +156,14 @@ export default function Cart({
                   <li>
                     <BsFillDashCircleFill onClick={() => decreaseQuantityOne(id)} cursor="pointer" />
                   </li>
-                  <li>{quantity}</li>
+                  <li>
+                    <span>{quantity}</span>
+                  </li>
                   <li>
                     <BsPlusCircleFill onClick={() => increaseQuantityOne(id)} cursor="pointer" />
+                  </li>
+                  <li>
+                    <button type="button">변경</button>
                   </li>
                 </ItemQuantityUl>
               </CartItemInfo>

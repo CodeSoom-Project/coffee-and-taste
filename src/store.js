@@ -7,8 +7,16 @@ import thunk from 'redux-thunk';
 import { logger } from 'redux-logger';
 
 import {
-  fetchCart, fetchCategories, fetchMenu, fetchMenuGroups, fetchMenus,
-  postLogin, postSignUp, postAddToCart, postOrder, patchCartItemQuantity,
+  fetchCart,
+  fetchCategories,
+  fetchMenu,
+  fetchMenuGroups,
+  fetchMenus,
+  patchCartItemQuantity,
+  postAddToCart,
+  postLogin,
+  postOrder,
+  postSignUp,
 } from './services/api';
 
 import { saveItem } from './services/localStorage';
@@ -297,7 +305,10 @@ export function requestUpdateCartItemQuantity(menuId) {
     const { quantity } = cartMenus.find((item) => item.id === menuId);
 
     try {
-      await patchCartItemQuantity({ accessToken, menuId, quantity });
+      const data = await patchCartItemQuantity({ accessToken, menuId, quantity });
+      if (data) {
+        alert('수량을 변경하였습니다.');
+      }
     } catch (err) {
       // TODO : 에러 처리
     }

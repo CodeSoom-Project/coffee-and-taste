@@ -99,6 +99,7 @@ const OrderDiv = styled.div({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
+  margin: '3rem 0',
 });
 
 const OrderButton = styled.button({

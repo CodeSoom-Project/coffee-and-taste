@@ -2,8 +2,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useEffect } from 'react';
 
-import { useNavigate } from 'react-router-dom';
-
 import styled from '@emotion/styled';
 
 import { BsFillDashCircleFill, BsPlusCircleFill } from 'react-icons/bs';
@@ -77,7 +75,6 @@ export default function MenuDetail({
   },
 }) {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const menuQuantity = useSelector((state) => state.menuQuantity);
 
@@ -87,7 +84,6 @@ export default function MenuDetail({
 
   const handleClickAddToCart = () => {
     dispatch(requestAddToCart());
-    navigate('/cart');
   };
 
   const handleClickPlusOne = () => {
@@ -123,7 +119,6 @@ export default function MenuDetail({
       </MenuQuantity>
       <OrderButton>주문하기</OrderButton>
       <CartButton onClick={handleClickAddToCart}>장바구니에 담기</CartButton>
-
     </>
   );
 }

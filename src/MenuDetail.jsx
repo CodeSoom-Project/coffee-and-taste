@@ -2,11 +2,15 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useEffect } from 'react';
 
+import { useNavigate } from 'react-router-dom';
+
 import styled from '@emotion/styled';
 
 import { BsFillDashCircleFill, BsPlusCircleFill } from 'react-icons/bs';
 
-import { initializeMenuQuantity, menuQuantityMinusOne, menuQuantityPlusOne } from './store';
+import {
+  initializeMenuQuantity, menuQuantityMinusOne, menuQuantityPlusOne, requestAddToCart,
+} from './store';
 
 const MenuImage = styled.div(
   ({ url }) => ({
@@ -73,6 +77,7 @@ export default function MenuDetail({
   },
 }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const menuQuantity = useSelector((state) => state.menuQuantity);
 
@@ -81,7 +86,8 @@ export default function MenuDetail({
   }, []);
 
   const handleClickAddToCart = () => {
-    // TODO : 클릭한 메뉴를 장바구니에 담는 api 호출하기
+    dispatch(requestAddToCart());
+    navigate('/cart');
   };
 
   const handleClickPlusOne = () => {

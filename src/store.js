@@ -8,7 +8,7 @@ import { logger } from 'redux-logger';
 
 import {
   fetchCart, fetchCategories, fetchMenu, fetchMenuGroups, fetchMenus,
-  postLogin, postOrder, postSignUp,
+  postLogin, postSignUp, postAddToCart, postOrder,
 } from './services/api';
 
 import { saveItem } from './services/localStorage';
@@ -259,6 +259,18 @@ export function menuQuantityMinusOne() {
 export function initializeMenuQuantity() {
   return {
     type: INITIALIZE_MENU_QUANTITY,
+  };
+}
+
+export function requestAddToCart() {
+  return async (dispatch, getState) => {
+    const { accessToken, menu: { id: menuId }, menuQuantity } = getState();
+
+    try {
+      await postAddToCart({ accessToken, menuId, quantity: menuQuantity });
+    } catch (err) {
+      // TODO : 에러 처리
+    }
   };
 }
 

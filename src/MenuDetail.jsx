@@ -41,11 +41,24 @@ const OrderButton = styled.button({
   padding: '0.5rem',
 });
 
+const CartButton = styled.button({
+  fontSize: '1.1rem',
+  borderRadius: '10%',
+  color: 'white',
+  backgroundColor: '#006633',
+  padding: '0.5rem',
+});
+
 export default function MenuDetail({
   menu: {
     description, englishName, imagePath, name, price,
   },
 }) {
+  const handleClickAddToCart = () => {
+    // TODO : 클릭한 메뉴를 장바구니에 담는 api 호출하기
+
+  };
+
   return (
     <>
       <MenuImage url={imagePath} />
@@ -65,6 +78,7 @@ export default function MenuDetail({
         원
       </MenuPrice>
       <OrderButton>주문하기</OrderButton>
+      <CartButton onClick={handleClickAddToCart}>장바구니에 담기</CartButton>
     </>
   );
 }

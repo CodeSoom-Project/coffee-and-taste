@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import { BsFillDashCircleFill, BsPlusCircleFill } from 'react-icons/bs';
+
 const MenuImage = styled.div(
   ({ url }) => ({
     margin: '30px auto',
@@ -49,6 +51,16 @@ const CartButton = styled.button({
   padding: '0.5rem',
 });
 
+const MenuQuantity = styled.div({
+  display: 'flex',
+  alignItems: 'center',
+});
+
+const Quantity = styled.span({
+  fontSize: '1.5rem',
+  padding: '0.5rem 1rem',
+});
+
 export default function MenuDetail({
   menu: {
     description, englishName, imagePath, name, price,
@@ -57,6 +69,16 @@ export default function MenuDetail({
   const handleClickAddToCart = () => {
     // TODO : 클릭한 메뉴를 장바구니에 담는 api 호출하기
 
+  };
+
+  const handleClickPlusOne = () => {
+    // TODO : 메뉴 수량 +1
+    alert('handleClickPlusOne');
+  };
+
+  const handleClickMinusOne = () => {
+    // TODO : 메뉴 수량 -1
+    alert('handleClickMinusOne');
   };
 
   return (
@@ -77,8 +99,14 @@ export default function MenuDetail({
         {price ? price.toLocaleString('ko-KR') : null}
         원
       </MenuPrice>
+      <MenuQuantity>
+        <BsFillDashCircleFill size="30" onClick={handleClickMinusOne} />
+        <Quantity>1</Quantity>
+        <BsPlusCircleFill size="30" onClick={handleClickPlusOne} />
+      </MenuQuantity>
       <OrderButton>주문하기</OrderButton>
       <CartButton onClick={handleClickAddToCart}>장바구니에 담기</CartButton>
+
     </>
   );
 }

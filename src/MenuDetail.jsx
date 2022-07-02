@@ -1,6 +1,10 @@
+import { useDispatch, useSelector } from 'react-redux';
+
 import styled from '@emotion/styled';
 
 import { BsFillDashCircleFill, BsPlusCircleFill } from 'react-icons/bs';
+
+import { menuQuantityMinusOne, menuQuantityPlusOne } from './store';
 
 const MenuImage = styled.div(
   ({ url }) => ({
@@ -66,19 +70,20 @@ export default function MenuDetail({
     description, englishName, imagePath, name, price,
   },
 }) {
+  const dispatch = useDispatch();
+
+  const menuQuantity = useSelector((state) => state.menuQuantity);
+
   const handleClickAddToCart = () => {
     // TODO : 클릭한 메뉴를 장바구니에 담는 api 호출하기
-
   };
 
   const handleClickPlusOne = () => {
-    // TODO : 메뉴 수량 +1
-    alert('handleClickPlusOne');
+    dispatch(menuQuantityPlusOne());
   };
 
   const handleClickMinusOne = () => {
-    // TODO : 메뉴 수량 -1
-    alert('handleClickMinusOne');
+    dispatch(menuQuantityMinusOne());
   };
 
   return (
@@ -101,7 +106,7 @@ export default function MenuDetail({
       </MenuPrice>
       <MenuQuantity>
         <BsFillDashCircleFill size="30" onClick={handleClickMinusOne} />
-        <Quantity>1</Quantity>
+        <Quantity>{menuQuantity}</Quantity>
         <BsPlusCircleFill size="30" onClick={handleClickPlusOne} />
       </MenuQuantity>
       <OrderButton>주문하기</OrderButton>

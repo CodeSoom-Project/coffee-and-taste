@@ -21,6 +21,7 @@ const initialState = {
   menuGroups: [],
   menus: [],
   menu: {},
+  menuQuantity: 1,
   selectedCategory: DEFAULT_SELECTED_CATEGORY_IS_NONE,
   loginFields: {
     email: '',
@@ -54,6 +55,9 @@ const SET_CART_MENUS = 'SET_CART_MENUS';
 const ADD_CHECKED_CART_ITEM = 'ADD_CHECKED_CART_ITEM';
 const REMOVE_UNCHECKED_CART_ITEM = 'REMOVE_UNCHECKED_CART_ITEM';
 const CLEAR_CHECKED_CART_ITEMS = 'CLEAR_CHECKED_CART_ITEMS';
+const MENU_QUANTITY_PLUS_ONE = 'MENU_QUANTITY_PLUS_ONE';
+const MENU_QUANTITY_MINUS_ONE = 'MENU_QUANTITY_MINUS_ONE';
+const INITIALIZE_MENU_QUANTITY = 'INITIALIZE_MENU_QUANTITY';
 
 export function updateLoginFields({ name, value }) {
   return {
@@ -240,6 +244,24 @@ export function requestOrder() {
   };
 }
 
+export function menuQuantityPlusOne() {
+  return {
+    type: MENU_QUANTITY_PLUS_ONE,
+  };
+}
+
+export function menuQuantityMinusOne() {
+  return {
+    type: MENU_QUANTITY_MINUS_ONE,
+  };
+}
+
+export function initializeMenuQuantity() {
+  return {
+    type: INITIALIZE_MENU_QUANTITY,
+  };
+}
+
 // - 리듀서
 function reducer(state = initialState, action = {}) {
   if (action.type === UPDATE_LOGIN_FIELDS) {
@@ -354,6 +376,27 @@ function reducer(state = initialState, action = {}) {
     return {
       ...state,
       checkedCartItems: [],
+    };
+  }
+
+  if (action.type === MENU_QUANTITY_PLUS_ONE) {
+    return {
+      ...state,
+      menuQuantity: state.menuQuantity + 1,
+    };
+  }
+
+  if (action.type === MENU_QUANTITY_MINUS_ONE) {
+    return {
+      ...state,
+      menuQuantity: state.menuQuantity - 1,
+    };
+  }
+
+  if (action.type === INITIALIZE_MENU_QUANTITY) {
+    return {
+      ...state,
+      menuQuantity: 1,
     };
   }
 

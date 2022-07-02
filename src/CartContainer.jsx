@@ -6,6 +6,8 @@ import {
   loadCart, addCheckedCartItem, removeUncheckedCartItem, requestOrder,
 } from './store';
 
+import Cart from './Cart';
+
 export default function CartContainer() {
   const dispatch = useDispatch();
 
@@ -23,8 +25,7 @@ export default function CartContainer() {
     }
   };
 
-  const handleChange = (event) => {
-    const { checked, value } = event.target;
+  const handleChange = ({ checked, value }) => {
     checkedItemHandler(checked, value);
   };
 
@@ -43,40 +44,10 @@ export default function CartContainer() {
   }
 
   return (
-    <div>
-      <h1>Cart</h1>
-      <hr />
-      <button type="button" onClick={handleClickOrder}>주문하기</button>
-      {
-        cartMenus.map(({
-          id,
-          menu: {
-            name, englishName, price, imagePath,
-          },
-          quantity,
-        }) => (
-          <div>
-            <input type="checkbox" name="menuId" value={id} onChange={handleChange} />
-            <span>
-              메뉴 이름 :
-              {name}
-            </span>
-            <span>
-              영어 이름 :
-              {englishName}
-            </span>
-            <span>
-              가격 :
-              {price}
-            </span>
-            <span>
-              수량 :
-              {quantity}
-            </span>
-            <img src={`https://coffee-and-taste.kro.kr${imagePath}`} alt={name} />
-          </div>
-        ))
-      }
-    </div>
+    <Cart
+      cartMenus={cartMenus}
+      onChange={handleChange}
+      onClick={handleClickOrder}
+    />
   );
 }

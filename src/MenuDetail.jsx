@@ -6,6 +6,7 @@ import styled from '@emotion/styled';
 
 import { BsFillDashCircleFill, BsPlusCircleFill } from 'react-icons/bs';
 
+import { useNavigate } from 'react-router-dom';
 import {
   initializeMenuQuantity, menuQuantityMinusOne, menuQuantityPlusOne, requestAddToCart,
 } from './store';
@@ -75,6 +76,7 @@ export default function MenuDetail({
   },
 }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const menuQuantity = useSelector((state) => state.menuQuantity);
 
@@ -84,6 +86,7 @@ export default function MenuDetail({
 
   const handleClickAddToCart = () => {
     dispatch(requestAddToCart());
+    navigate('/cart');
   };
 
   const handleClickPlusOne = () => {

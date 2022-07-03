@@ -278,7 +278,11 @@ export function requestAddToCart() {
     const { accessToken, menu: { id: menuId }, menuQuantity } = getState();
 
     try {
-      await postAddToCart({ accessToken, menuId, quantity: menuQuantity });
+      const responseStatus = await postAddToCart({ accessToken, menuId, quantity: menuQuantity });
+
+      if (responseStatus === 201) {
+        dispatch(loadCart());
+      }
     } catch (err) {
       // TODO : 에러 처리
     }

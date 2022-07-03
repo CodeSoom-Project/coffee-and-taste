@@ -80,8 +80,8 @@ export async function postAddToCart({ accessToken, menuId, quantity }) {
       quantity,
     }),
   });
-  const data = await response.json();
-  return data;
+
+  return response.status;
 }
 
 export async function postOrder({ accessToken, checkedCartItems }) {
@@ -126,6 +126,5 @@ export async function deleteCartItem({ accessToken, menuId }) {
     },
   });
 
-  const responseData = await response;
-  return responseData.status;
+  return response.status;
 }

@@ -3,6 +3,11 @@ import styled from '@emotion/styled';
 import { BsFillDashCircleFill, BsPlusCircleFill } from 'react-icons/bs';
 import { VscClose } from 'react-icons/vsc';
 
+const CartContainerStyle = styled.div({
+  width: '800px',
+  margin: '0 auto',
+});
+
 const ItemContainer = styled.div({
   border: '1px solid gray',
   margin: '20px 0',
@@ -30,7 +35,7 @@ const CartButtonGroup = styled.div({
 
 const CartItem = styled.div({
   display: 'grid',
-  gridTemplateColumns: '40% auto',
+  gridTemplateColumns: '30% auto',
 });
 
 const CartItemImage = styled.div(
@@ -51,6 +56,8 @@ const CartItemInfo = styled.div({
   justifyContent: 'center',
   alignItems: 'flex-start',
   gap: '15px',
+  width: '80%',
+  margin: '0 auto',
 });
 
 const ItemName = styled.h1({
@@ -76,7 +83,7 @@ const ItemQuantityUl = styled.ul({
   alignContent: 'center',
   '& li': {
     display: 'grid',
-    justifyContent: 'center',
+    justifyContent: 'stretch',
     alignItems: 'center',
     fontSize: '1.7rem',
     lineHeight: '3rem',
@@ -129,7 +136,7 @@ export default function Cart({
   };
 
   return (
-    <>
+    <CartContainerStyle>
       <CartTitle>장바구니</CartTitle>
       <hr />
       {
@@ -176,6 +183,6 @@ export default function Cart({
       <OrderDiv>
         <OrderButton onClick={onClick}>주문하기</OrderButton>
       </OrderDiv>
-    </>
+    </CartContainerStyle>
   );
 }

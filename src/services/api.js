@@ -126,6 +126,6 @@ export async function deleteCartItem({ accessToken, menuId }) {
     },
   });
 
-  const data = await response.json();
-  return data;
+  const responseData = await response;
+  return responseData.status;
 }

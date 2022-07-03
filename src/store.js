@@ -321,7 +321,12 @@ export function requestRemoveCartItem(menuId) {
     const { accessToken } = getState();
 
     try {
-      await deleteCartItem({ accessToken, menuId });
+      const responseStatus = await deleteCartItem({ accessToken, menuId });
+
+      if (responseStatus === 204) {
+        alert('메뉴를 삭제했습니다.');
+        dispatch(loadCart());
+      }
     } catch (err) {
       // TODO : 에러 처리
     }

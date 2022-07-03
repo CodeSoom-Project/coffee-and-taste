@@ -55,16 +55,6 @@ export default function CartContainer() {
     dispatch(requestUpdateCartItemQuantity(menuId));
   };
 
-  if (cartMenus.length === 0) {
-    return (
-      <div>
-        <h1>Cart</h1>
-        <hr />
-        <div>장바구니에 담긴 메뉴가 없습니다!</div>
-      </div>
-    );
-  }
-
   return (
     <Cart
       cartMenus={cartMenus}

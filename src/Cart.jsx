@@ -24,6 +24,17 @@ const CartTitle = styled.h1({
   paddingLeft: '10px',
 });
 
+const CartNoItem = styled.div({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: '300px',
+  '&': {
+    fontSize: '2rem',
+  },
+});
+
 const CartButtonGroup = styled.div({
   display: 'flex',
   justifyContent: 'space-between',
@@ -136,6 +147,18 @@ export default function Cart({
     const { checked, value } = event.target;
     onChange({ checked, value });
   };
+
+  if (cartMenus.length === 0) {
+    return (
+      <CartContainerStyle>
+        <CartTitle>장바구니</CartTitle>
+        <hr />
+        <CartNoItem>
+          장바구니에 담긴 메뉴가 없습니다.
+        </CartNoItem>
+      </CartContainerStyle>
+    );
+  }
 
   return (
     <CartContainerStyle>

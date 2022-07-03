@@ -115,16 +115,17 @@ const OrderButton = styled.button({
 });
 
 export default function Cart({
-  cartMenus, onChange, onClick, increaseQuantityOne, decreaseQuantityOne, updateItemQuantity,
+  cartMenus,
+  onChange,
+  onClick,
+  removeCartItem,
+  increaseQuantityOne,
+  decreaseQuantityOne,
+  updateItemQuantity,
 }) {
   const handleChange = (event) => {
     const { checked, value } = event.target;
     onChange({ checked, value });
-  };
-
-  const handleClickRemoveItem = () => {
-    // TODO : 선택한 메뉴를 장바구니에서 제거하는 api 호출
-    alert('해당 기능은 준비중입니다.');
   };
 
   return (
@@ -142,7 +143,7 @@ export default function Cart({
           <ItemContainer>
             <CartButtonGroup>
               <input type="checkbox" name="menuId" value={id} onChange={handleChange} />
-              <VscClose size="45" cursor="pointer" onClick={handleClickRemoveItem} />
+              <VscClose size="45" cursor="pointer" onClick={() => removeCartItem(id)} />
             </CartButtonGroup>
             <CartItem>
               <CartItemImage url={imagePath} />

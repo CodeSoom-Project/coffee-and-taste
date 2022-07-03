@@ -115,3 +115,17 @@ export async function patchCartItemQuantity({ accessToken, menuId, quantity }) {
   const data = await response.json();
   return data;
 }
+
+export async function deleteCartItem({ accessToken, menuId }) {
+  const url = `${BASE_URL}/cart/cart-menus/${menuId}`;
+  const response = await fetch(url, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
+  const data = await response.json();
+  return data;
+}

@@ -3,12 +3,13 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
-  loadCart,
   addCheckedCartItem,
+  cartMenuQuantityMinusOne,
+  cartMenuQuantityPlusOne,
+  loadCart,
   removeUncheckedCartItem,
   requestOrder,
-  cartMenuQuantityPlusOne,
-  cartMenuQuantityMinusOne,
+  requestRemoveCartItem,
   requestUpdateCartItemQuantity,
 } from './store';
 
@@ -17,11 +18,11 @@ import Cart from './Cart';
 export default function CartContainer() {
   const dispatch = useDispatch();
 
+  const cartMenus = useSelector((state) => state.cartMenus);
+
   useEffect(() => {
     dispatch(loadCart());
-  }, []);
-
-  const cartMenus = useSelector((state) => state.cartMenus);
+  }, [dispatch]);
 
   const checkedItemHandler = (isChecked, checkedItemId) => {
     if (isChecked) {
@@ -33,6 +34,10 @@ export default function CartContainer() {
 
   const handleChange = ({ checked, value }) => {
     checkedItemHandler(checked, value);
+  };
+
+  const handleClickRemoveCartItem = (menuId) => {
+    dispatch(requestRemoveCartItem(menuId));
   };
 
   const handleClickOrder = () => {
@@ -48,7 +53,6 @@ export default function CartContainer() {
   };
 
   const handleClickUpdateItemQuantity = (menuId) => {
-    // TODO : 특정 menuId 와 해당 menuId 의 quantity 를 전달하여 수량 업데이트 요청하기
     dispatch(requestUpdateCartItemQuantity(menuId));
   };
 
@@ -67,6 +71,7 @@ export default function CartContainer() {
       cartMenus={cartMenus}
       onChange={handleChange}
       onClick={handleClickOrder}
+      removeCartItem={handleClickRemoveCartItem}
       increaseQuantityOne={handleClickQuantityPlusOne}
       decreaseQuantityOne={handleClickQuantityMinusOne}
       updateItemQuantity={handleClickUpdateItemQuantity}

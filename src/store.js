@@ -7,6 +7,7 @@ import thunk from 'redux-thunk';
 import { logger } from 'redux-logger';
 
 import {
+  deleteCartItem,
   fetchCart,
   fetchCategories,
   fetchMenu,
@@ -309,6 +310,18 @@ export function requestUpdateCartItemQuantity(menuId) {
       if (data) {
         alert('수량을 변경하였습니다.');
       }
+    } catch (err) {
+      // TODO : 에러 처리
+    }
+  };
+}
+
+export function requestRemoveCartItem(menuId) {
+  return async (dispatch, getState) => {
+    const { accessToken } = getState();
+
+    try {
+      await deleteCartItem({ accessToken, menuId });
     } catch (err) {
       // TODO : 에러 처리
     }

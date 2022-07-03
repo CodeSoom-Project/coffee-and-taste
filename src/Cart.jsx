@@ -9,8 +9,10 @@ const CartContainerStyle = styled.div({
 });
 
 const ItemContainer = styled.div({
-  border: '1px solid gray',
+  border: '1px solid #e1e1e8',
   margin: '20px 0',
+  borderRadius: '30px',
+  padding: '20px 20px',
 });
 
 const CartTitle = styled.h1({

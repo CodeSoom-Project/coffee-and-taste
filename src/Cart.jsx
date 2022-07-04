@@ -36,27 +36,30 @@ const CartNoItem = styled.div({
 });
 
 const CartButtonGroup = styled.div({
+  marginTop: '-5px',
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
   '& input[type=checkbox]': {
-    width: '35px',
-    height: '35px',
+    width: '30px',
+    height: '30px',
     cursor: 'pointer',
   },
 });
 
 const CartItem = styled.div({
+  marginTop: '-45px',
+  marginBottom: '-10px',
   display: 'grid',
   gridTemplateColumns: '30% auto',
 });
 
 const CartItemImage = styled.div(
   ({ url }) => ({
-    margin: '30px auto',
+    margin: '10px auto',
     borderRadius: '50%',
-    width: '150px',
-    height: '150px',
+    width: '100px',
+    height: '100px',
     ...(url && {
       background: `url("https://coffee-and-taste.kro.kr${url}") center/100% no-repeat`,
     }),
@@ -68,24 +71,24 @@ const CartItemInfo = styled.div({
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'flex-start',
-  gap: '15px',
-  width: '80%',
+  gap: '10px',
+  width: '100%',
   margin: '0 auto',
 });
 
 const ItemName = styled.h1({
-  fontSize: '1.5rem',
+  fontSize: '1.1rem',
   fontWeight: '600',
 });
 
 const ItemEnglishName = styled.h2({
-  fontSize: '1.1rem',
+  fontSize: '1.0rem',
   fontWeight: '350',
   color: 'rgba(179, 179, 179)',
 });
 
 const ItemPrice = styled.h3({
-  fontSize: '1.3rem',
+  fontSize: '1.0rem',
 });
 
 const ItemQuantityUl = styled.ul({
@@ -94,12 +97,23 @@ const ItemQuantityUl = styled.ul({
   display: 'grid',
   gridTemplateColumns: '1fr 1fr 1fr 2fr 2fr',
   alignContent: 'center',
-  '& li': {
+});
+
+const ItemQuantityLi = styled.li(
+  ({ active }) => ({
     display: 'grid',
     justifyContent: 'center',
     alignItems: 'center',
-    fontSize: '1.7rem',
-    lineHeight: '3rem',
+    fontSize: '1.3rem',
+    lineHeight: '2rem',
+    '& svg': {
+      fontSize: '1.7rem',
+      cursor: 'pointer',
+      ...(active && {
+        opacity: '0.5',
+        cursor: 'not-allowed',
+      }),
+    },
     '& button': {
       width: '5rem',
       height: '2rem',
@@ -112,8 +126,8 @@ const ItemQuantityUl = styled.ul({
       fontSize: '1rem',
       lineHeight: '1.5rem',
     },
-  },
-});
+  }),
+);
 
 const OrderDiv = styled.div({
   display: 'flex',
@@ -191,7 +205,7 @@ export default function Cart({
                     value={id}
                     onChange={handleChange}
                   />
-                  <VscClose size="45" cursor="pointer" onClick={() => removeCartItem(id)} />
+                  <VscClose size="30" cursor="pointer" onClick={() => removeCartItem(id)} />
                 </CartButtonGroup>
                 <CartItem>
                   <CartItemImage url={imagePath} />
@@ -202,25 +216,29 @@ export default function Cart({
                       {price ? price.toLocaleString('ko-KR') : null}
                       원
                     </ItemPrice>
-                    <ItemQuantityUl id={id}>
-                      <li>
-                        <BsFillDashCircleFill onClick={() => decreaseQuantityOne(id)} cursor="pointer" />
-                      </li>
-                      <li>
+                    <ItemQuantityUl>
+                      <ItemQuantityLi active={quantity === 1}>
+                        <BsFillDashCircleFill
+                          onClick={() => decreaseQuantityOne(id)}
+                        />
+                      </ItemQuantityLi>
+                      <ItemQuantityLi>
                         <span>{quantity}</span>
-                      </li>
-                      <li>
-                        <BsPlusCircleFill onClick={() => increaseQuantityOne(id)} cursor="pointer" />
-                      </li>
-                      <li>
+                      </ItemQuantityLi>
+                      <ItemQuantityLi>
+                        <BsPlusCircleFill
+                          onClick={() => increaseQuantityOne(id)}
+                        />
+                      </ItemQuantityLi>
+                      <ItemQuantityLi>
                         <button type="button" onClick={() => updateItemQuantity(id)}>변경</button>
-                      </li>
-                      <li>
+                      </ItemQuantityLi>
+                      <ItemQuantityLi>
                         <span>
                           {(quantity * price).toLocaleString('ko-KR')}
                           원
                         </span>
-                      </li>
+                      </ItemQuantityLi>
                     </ItemQuantityUl>
                   </CartItemInfo>
                 </CartItem>

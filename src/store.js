@@ -281,7 +281,7 @@ export function requestAddToCart() {
       const responseStatus = await postAddToCart({ accessToken, menuId, quantity: menuQuantity });
 
       if (responseStatus === 201) {
-        dispatch(loadCart());
+        alert('메뉴를 장바구니에 담았습니다.');
       }
     } catch (err) {
       // TODO : 에러 처리

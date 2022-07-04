@@ -85,8 +85,10 @@ export default function MenuDetail({
   }, []);
 
   const handleClickAddToCart = () => {
-    dispatch(requestAddToCart());
-    navigate('/cart');
+    dispatch(requestAddToCart())
+      .then(
+        () => navigate('/cart'),
+      );
   };
 
   const handleClickPlusOne = () => {

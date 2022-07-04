@@ -145,6 +145,7 @@ export default function Cart({
   updateItemQuantity,
 }) {
   let totalPayment = 0;
+  let totalQuantity = 0;
 
   const handleChange = (event) => {
     const { checked, value } = event.target;
@@ -177,6 +178,7 @@ export default function Cart({
         }) => {
           if (checkedCartItems.includes(String(id))) {
             totalPayment += (price * quantity);
+            totalQuantity += quantity;
           }
 
           return (
@@ -227,6 +229,12 @@ export default function Cart({
           );
         })
       }
+      <div>
+        총
+        {' '}
+        {totalQuantity}
+        개
+      </div>
       <div>
         총 결제 금액 :
         {' '}

@@ -92,11 +92,11 @@ const ItemQuantityUl = styled.ul({
   listStyle: 'none',
   width: '100%',
   display: 'grid',
-  gridTemplateColumns: 'repeat(3, 1fr) 3fr',
+  gridTemplateColumns: '1fr 1fr 1fr 2fr 2fr',
   alignContent: 'center',
   '& li': {
     display: 'grid',
-    justifyContent: 'stretch',
+    justifyContent: 'center',
     alignItems: 'center',
     fontSize: '1.7rem',
     lineHeight: '3rem',
@@ -199,12 +199,21 @@ export default function Cart({
                   <li>
                     <button type="button" onClick={() => updateItemQuantity(id)}>변경</button>
                   </li>
+                  <li>
+                    <span>{quantity * price}</span>
+                  </li>
                 </ItemQuantityUl>
               </CartItemInfo>
             </CartItem>
           </ItemContainer>
         ))
       }
+      <div>
+        총 결제 금액:
+        {' '}
+        <span>0</span>
+        원
+      </div>
       <OrderDiv>
         <OrderButton onClick={onClick}>주문하기</OrderButton>
       </OrderDiv>

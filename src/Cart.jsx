@@ -144,6 +144,8 @@ export default function Cart({
   decreaseQuantityOne,
   updateItemQuantity,
 }) {
+  let totalPayment = 0;
+
   const handleChange = (event) => {
     const { checked, value } = event.target;
     onChange({ checked, value });
@@ -161,8 +163,6 @@ export default function Cart({
     );
   }
 
-  let totalPayment = 0;
-
   return (
     <CartContainerStyle>
       <CartTitle>장바구니</CartTitle>
@@ -175,11 +175,8 @@ export default function Cart({
           },
           quantity,
         }) => {
-          let isChecked = false;
-
           if (checkedCartItems.includes(String(id))) {
             totalPayment += (price * quantity);
-            isChecked = !isChecked;
           }
 
           return (
@@ -191,7 +188,6 @@ export default function Cart({
                     name="menuId"
                     value={id}
                     onChange={handleChange}
-                    checked={isChecked ? true : null}
                   />
                   <VscClose size="45" cursor="pointer" onClick={() => removeCartItem(id)} />
                 </CartButtonGroup>

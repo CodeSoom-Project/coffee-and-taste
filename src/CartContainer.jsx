@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   addCheckedCartItem,
   cartMenuQuantityMinusOne,
-  cartMenuQuantityPlusOne,
+  cartMenuQuantityPlusOne, clearCheckedCartItems,
   loadCart,
   removeUncheckedCartItem,
   requestOrder,
@@ -22,6 +22,7 @@ export default function CartContainer() {
 
   useEffect(() => {
     dispatch(loadCart());
+    dispatch(clearCheckedCartItems());
   }, []);
 
   const checkedItemHandler = (isChecked, checkedItemId) => {

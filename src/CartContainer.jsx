@@ -18,10 +18,11 @@ export default function CartContainer() {
   const dispatch = useDispatch();
 
   const cartMenus = useSelector((state) => state.cartMenus);
+  const checkedCartItems = useSelector((state) => state.checkedCartItems);
 
   useEffect(() => {
     dispatch(loadCart());
-  }, [dispatch]);
+  }, []);
 
   const checkedItemHandler = (isChecked, checkedItemId) => {
     if (isChecked) {
@@ -58,6 +59,7 @@ export default function CartContainer() {
   return (
     <Cart
       cartMenus={cartMenus}
+      checkedCartItems={checkedCartItems}
       onChange={handleChange}
       onClick={handleClickOrder}
       removeCartItem={handleClickRemoveCartItem}

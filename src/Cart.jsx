@@ -136,6 +136,7 @@ const OrderButton = styled.button({
 
 export default function Cart({
   cartMenus,
+  checkedCartItems,
   onChange,
   onClick,
   removeCartItem,
@@ -160,6 +161,8 @@ export default function Cart({
     );
   }
 
+  let totalPayment = 0;
+
   return (
     <CartContainerStyle>
       <CartTitle>장바구니</CartTitle>
@@ -171,47 +174,67 @@ export default function Cart({
             name, englishName, price, imagePath,
           },
           quantity,
-        }) => (
-          <ItemContainer>
-            <CartButtonGroup>
-              <input type="checkbox" name="menuId" value={id} onChange={handleChange} />
-              <VscClose size="45" cursor="pointer" onClick={() => removeCartItem(id)} />
-            </CartButtonGroup>
-            <CartItem>
-              <CartItemImage url={imagePath} />
-              <CartItemInfo>
-                <ItemName>{name}</ItemName>
-                <ItemEnglishName>{englishName}</ItemEnglishName>
-                <ItemPrice>
-                  {price ? price.toLocaleString('ko-KR') : null}
-                  원
-                </ItemPrice>
-                <ItemQuantityUl id={id}>
-                  <li>
-                    <BsFillDashCircleFill onClick={() => decreaseQuantityOne(id)} cursor="pointer" />
-                  </li>
-                  <li>
-                    <span>{quantity}</span>
-                  </li>
-                  <li>
-                    <BsPlusCircleFill onClick={() => increaseQuantityOne(id)} cursor="pointer" />
-                  </li>
-                  <li>
-                    <button type="button" onClick={() => updateItemQuantity(id)}>변경</button>
-                  </li>
-                  <li>
-                    <span>{quantity * price}</span>
-                  </li>
-                </ItemQuantityUl>
-              </CartItemInfo>
-            </CartItem>
-          </ItemContainer>
-        ))
+        }) => {
+          let isChecked = false;
+
+          if (checkedCartItems.includes(String(id))) {
+            totalPayment += (price * quantity);
+            isChecked = !isChecked;
+          }
+
+          return (
+            (
+              <ItemContainer>
+                <CartButtonGroup>
+                  <input
+                    type="checkbox"
+                    name="menuId"
+                    value={id}
+                    onChange={handleChange}
+                    checked={isChecked ? true : null}
+                  />
+                  <VscClose size="45" cursor="pointer" onClick={() => removeCartItem(id)} />
+                </CartButtonGroup>
+                <CartItem>
+                  <CartItemImage url={imagePath} />
+                  <CartItemInfo>
+                    <ItemName>{name}</ItemName>
+                    <ItemEnglishName>{englishName}</ItemEnglishName>
+                    <ItemPrice>
+                      {price ? price.toLocaleString('ko-KR') : null}
+                      원
+                    </ItemPrice>
+                    <ItemQuantityUl id={id}>
+                      <li>
+                        <BsFillDashCircleFill onClick={() => decreaseQuantityOne(id)} cursor="pointer" />
+                      </li>
+                      <li>
+                        <span>{quantity}</span>
+                      </li>
+                      <li>
+                        <BsPlusCircleFill onClick={() => increaseQuantityOne(id)} cursor="pointer" />
+                      </li>
+                      <li>
+                        <button type="button" onClick={() => updateItemQuantity(id)}>변경</button>
+                      </li>
+                      <li>
+                        <span>
+                          {(quantity * price).toLocaleString('ko-KR')}
+                          원
+                        </span>
+                      </li>
+                    </ItemQuantityUl>
+                  </CartItemInfo>
+                </CartItem>
+              </ItemContainer>
+            )
+          );
+        })
       }
       <div>
-        총 결제 금액:
+        총 결제 금액 :
         {' '}
-        <span>0</span>
+        <span>{totalPayment.toLocaleString('ko-KR')}</span>
         원
       </div>
       <OrderDiv>

@@ -1,10 +1,14 @@
 import { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
+
+import { useNavigate } from 'react-router-dom';
+
 import {
   addCheckedCartItem,
   cartMenuQuantityMinusOne,
-  cartMenuQuantityPlusOne, clearCheckedCartItems,
+  cartMenuQuantityPlusOne,
+  clearCheckedCartItems,
   loadCart,
   removeUncheckedCartItem,
   requestOrder,
@@ -14,8 +18,11 @@ import {
 
 import Cart from './Cart';
 
+import { CURRENT_PAGE_RELOAD } from './constants';
+
 export default function CartContainer() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const cartMenus = useSelector((state) => state.cartMenus);
   const checkedCartItems = useSelector((state) => state.checkedCartItems);
@@ -54,7 +61,10 @@ export default function CartContainer() {
   };
 
   const handleClickUpdateItemQuantity = (menuId) => {
-    dispatch(requestUpdateCartItemQuantity(menuId));
+    dispatch(requestUpdateCartItemQuantity(menuId))
+      .then(() => {
+        navigate(CURRENT_PAGE_RELOAD);
+      });
   };
 
   return (

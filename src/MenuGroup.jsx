@@ -17,9 +17,9 @@ const MenuGroupImage = styled.div({
   '& img': {
     width: '100%',
     height: '100%',
+    transition: '1s',
     '&:hover': {
       transform: 'scale(1.2, 1.2)',
-      transition: '1s',
     },
   },
 });

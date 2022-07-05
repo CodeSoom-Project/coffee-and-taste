@@ -16,7 +16,7 @@ const CategoryContainerStyle = styled.div({
     textDecoration: 'none',
     '&:hover': {
       color: '#000',
-      borderBottom: '2px solid green',
+      borderBottom: '4px solid green',
     },
   },
 });
@@ -26,9 +26,11 @@ const Category = styled.div(
     padding: '20px 0',
     fontSize: '1.8rem',
     fontWeight: 'bold',
-    ...(active && {
-      borderBottom: '4px solid green',
-    }),
+    '& a': {
+      ...(active && {
+        borderBottom: '4px solid green',
+      }),
+    },
   }),
 );
 
@@ -40,11 +42,11 @@ export default function CategoryContainer() {
     <CategoryContainerStyle>
       {
         categories.map(({ id, name }) => (
-          <Link to={`/categories/${id}/menu-groups`}>
-            <Category key={id} active={selectedCategory === id}>
+          <Category key={id} active={selectedCategory === id}>
+            <Link to={`/categories/${id}/menu-groups`}>
               {name}
-            </Category>
-          </Link>
+            </Link>
+          </Category>
         ))
       }
     </CategoryContainerStyle>

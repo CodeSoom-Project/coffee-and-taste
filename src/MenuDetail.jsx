@@ -11,21 +11,21 @@ import {
   initializeMenuQuantity, menuQuantityMinusOne, menuQuantityPlusOne, requestAddToCart,
 } from './store';
 
-const MenuImage = styled.div(
-  ({ url }) => ({
-    margin: '30px auto',
-    borderRadius: '50%',
-    width: '200px',
-    height: '200px',
+const MenuImage = styled.div({
+  width: '250px',
+  height: '250px',
+  margin: '30px auto',
+  overflow: 'hidden',
+  borderRadius: '50%',
+  '& img': {
+    width: '100%',
+    height: '100%',
     '&:hover': {
-      transform: 'scale(1.1, 1.1)',
-      transition: '.5s',
+      transform: 'scale(1.2, 1.2)',
+      transition: '1s',
     },
-    ...(url && {
-      background: `url("https://coffee-and-taste.kro.kr${url}") center/100% no-repeat`,
-    }),
-  }),
-);
+  },
+});
 
 const MenuName = styled.h1({
   textAlign: 'center',
@@ -131,7 +131,9 @@ export default function MenuDetail({
 
   return (
     <>
-      <MenuImage url={imagePath} />
+      <MenuImage>
+        <img src={`https://coffee-and-taste.kro.kr${imagePath}`} alt={name} />
+      </MenuImage>
       <MenuName>{name}</MenuName>
       <MenuEnglishName>{englishName}</MenuEnglishName>
       <hr />

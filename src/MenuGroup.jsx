@@ -8,24 +8,30 @@ const MenuGroupStyle = styled.div({
   gridGap: '1rem',
 });
 
-const MenuGroupImage = styled.div(
+const MenuGroupImage = styled.div({
+  width: '200px',
+  height: '200px',
+  margin: '50px auto 30px auto',
+  overflow: 'hidden',
+  borderRadius: '50%',
+  '& img': {
+    width: '100%',
+    height: '100%',
+    '&:hover': {
+      transform: 'scale(1.2, 1.2)',
+      transition: '1s',
+    },
+  },
+});
+
+const MenuGroupNoImage = styled.div(
   {
     margin: '50px auto 30px auto',
     borderRadius: '50%',
-    width: '150px',
-    height: '150px',
-    '&:hover': {
-      transform: 'scale(1.1, 1.1)',
-      transition: '.5s',
-    },
+    width: '200px',
+    height: '200px',
+    background: '#1E3932',
   },
-  ({ url }) => (url ? ({
-    background: `url("https://coffee-and-taste.kro.kr${url}") center/100% no-repeat`,
-  }) : ({
-    border: '2px solid green',
-    backgroundColor: '#1E3932',
-  })),
-
 );
 
 const MenuGroupName = styled.div({
@@ -47,7 +53,15 @@ export default function MenuGroup({ menuGroups, selectedCategory }) {
       {
         menuGroups.map(({ id, name, representativeImagePath }) => (
           <div key={id}>
-            <MenuGroupImage url={representativeImagePath} />
+            {
+              representativeImagePath ? (
+                <MenuGroupImage>
+                  <img src={`https://coffee-and-taste.kro.kr${representativeImagePath}`} alt={name} />
+                </MenuGroupImage>
+              ) : (
+                <MenuGroupNoImage />
+              )
+            }
             <MenuGroupName>
               <Link to={`/menu-groups/${id}`} state={{ categoryId: selectedCategory }}>
                 {name}

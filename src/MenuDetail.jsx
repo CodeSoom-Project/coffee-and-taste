@@ -25,11 +25,13 @@ const MenuImage = styled.div(
 
 const MenuName = styled.h1({
   fontSize: '1.7rem',
+  fontWeight: '500',
   paddingBottom: '.5rem',
 });
 
 const MenuEnglishName = styled.h2({
-  fontSize: '1.5rem',
+  fontSize: '1.3rem',
+  color: 'rgba(179, 179, 179)',
   paddingBottom: '.5rem',
 });
 
@@ -40,7 +42,8 @@ const MenuDescription = styled.p({
 });
 
 const MenuPrice = styled.h3({
-  fontSize: '1.3rem',
+  fontSize: '1.8rem',
+  fontWeight: '500',
   padding: '1rem 0',
 });
 

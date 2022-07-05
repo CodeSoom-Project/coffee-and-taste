@@ -17,6 +17,8 @@ const List = styled.ul({
   display: 'flex',
   justifyContent: 'flex-end',
   alignItems: 'center',
+  margin: '0 auto',
+  width: '95%',
   height: '3rem',
 });
 

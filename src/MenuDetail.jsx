@@ -55,6 +55,9 @@ const MenuQuantity = styled.div(
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    '& svg': {
+      cursor: 'pointer',
+    },
     '& svg:first-child': {
       ...(active && {
         opacity: '0.3',

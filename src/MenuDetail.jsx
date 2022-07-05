@@ -46,6 +46,9 @@ const MenuDescription = styled.p({
   fontSize: '1.2rem',
   paddingTop: '.5rem',
   lineHeight: '1.6rem',
+  '& span': {
+    wordBreak: 'keep-all',
+  },
 });
 
 const MenuPrice = styled.h3({
@@ -83,7 +86,6 @@ const OrderButton = styled.button({
   background: 'transparent',
   border: '2px solid #00704a',
   borderRadius: '5px',
-  outline: 'none',
   cursor: 'pointer',
   transition: 'background-color .7s, color .7s',
   '&:hover': {
@@ -102,7 +104,6 @@ const CartButton = styled.button({
   background: 'transparent',
   border: '2px solid #00704a',
   borderRadius: '5px',
-  outline: 'none',
   cursor: 'pointer',
   transition: 'background-color .7s, color .7s',
   '&:hover': {

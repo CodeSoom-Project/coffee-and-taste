@@ -13,6 +13,7 @@ const CategoryContainerStyle = styled.div({
   '& a': {
     color: '#555555',
     textDecoration: 'none',
+    transition: 'border-bottom .08s',
     '&:hover': {
       color: '#000',
       borderBottom: '4px solid green',

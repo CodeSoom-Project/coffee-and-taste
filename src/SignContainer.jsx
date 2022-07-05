@@ -40,6 +40,7 @@ const Item = styled.li({
     justifyContent: 'center',
     alignItems: 'center',
     lineHeight: '1.5rem',
+    transition: 'border-bottom .08s',
     '&:hover': {
       color: '#000',
       fontWeight: '700',

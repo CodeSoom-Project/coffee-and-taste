@@ -47,7 +47,9 @@ export default function CartContainer() {
   };
 
   const handleClickRemoveCartItem = (menuId) => {
-    dispatch(requestRemoveCartItem(menuId));
+    if (window.confirm('메뉴를 삭제하시겠습니까?')) {
+      dispatch(requestRemoveCartItem(menuId));
+    }
   };
 
   const handleClickOrder = () => {

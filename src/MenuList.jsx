@@ -9,8 +9,8 @@ const MenuImage = styled.div(
   ({ url }) => ({
     margin: '50px auto 20px auto',
     borderRadius: '50%',
-    width: '200px',
-    height: '200px',
+    width: '150px',
+    height: '150px',
     ...(url && {
       background: `url("https://coffee-and-taste.kro.kr${url}") center/100% no-repeat`,
     }),

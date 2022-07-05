@@ -8,6 +8,29 @@ const CartContainerStyle = styled.div({
   margin: '0 auto',
 });
 
+const RemoveButtonDiv = styled.div({
+  display: 'flex',
+  justifyContent: 'flex-end',
+  alignItems: 'center',
+});
+
+const RemoveSelectedItemsButton = styled.button({
+  border: 'none',
+  backgroundColor: 'inherit',
+  padding: '10px 15px',
+  color: '#006633',
+  fontSize: '16px',
+  cursor: 'pointer',
+});
+
+const RemoveAllItemButton = styled.button({
+  border: 'none',
+  backgroundColor: 'inherit',
+  padding: '10px 15px',
+  fontSize: '16px',
+  cursor: 'pointer',
+});
+
 const ItemContainer = styled.div({
   border: '1px solid #e1e1e8',
   margin: '20px 0',
@@ -44,6 +67,9 @@ const CartButtonGroup = styled.div({
     width: '30px',
     height: '30px',
     cursor: 'pointer',
+  },
+  '& svg': {
+    zIndex: '1',
   },
 });
 
@@ -129,6 +155,28 @@ const ItemQuantityLi = styled.li(
   }),
 );
 
+const TotalQuantityAndPriceDiv = styled.div({
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  marginTop: '1rem',
+});
+
+const TotalQuantityDiv = styled.div({
+  fontSize: '1.5rem',
+  '& span': {
+    color: '#006633',
+    fontWeight: '700',
+  },
+});
+
+const TotalPriceDiv = styled.div({
+  fontSize: '2rem',
+  '& span': {
+    fontWeight: '700',
+  },
+});
+
 const OrderDiv = styled.div({
   display: 'flex',
   justifyContent: 'center',
@@ -182,6 +230,11 @@ export default function Cart({
     <CartContainerStyle>
       <CartTitle>장바구니</CartTitle>
       <hr />
+      <RemoveButtonDiv>
+        <RemoveSelectedItemsButton>선택 삭제</RemoveSelectedItemsButton>
+        <span>|</span>
+        <RemoveAllItemButton>전체 삭제</RemoveAllItemButton>
+      </RemoveButtonDiv>
       {
         cartMenus.map(({
           id,
@@ -205,7 +258,11 @@ export default function Cart({
                     value={id}
                     onChange={handleChange}
                   />
-                  <VscClose size="30" cursor="pointer" onClick={() => removeCartItem(id)} />
+                  <VscClose
+                    size="30"
+                    cursor="pointer"
+                    onClick={() => removeCartItem(id)}
+                  />
                 </CartButtonGroup>
                 <CartItem>
                   <CartItemImage url={imagePath} />
@@ -247,18 +304,19 @@ export default function Cart({
           );
         })
       }
-      <div>
-        총
-        {' '}
-        {totalQuantity}
-        개
-      </div>
-      <div>
-        총 결제 금액 :
-        {' '}
-        <span>{totalPayment.toLocaleString('ko-KR')}</span>
-        원
-      </div>
+      <hr />
+      <TotalQuantityAndPriceDiv>
+        <TotalQuantityDiv>
+          총
+          {' '}
+          <span>{totalQuantity}</span>
+          개
+        </TotalQuantityDiv>
+        <TotalPriceDiv>
+          <span>{totalPayment.toLocaleString('ko-KR')}</span>
+          원
+        </TotalPriceDiv>
+      </TotalQuantityAndPriceDiv>
       <OrderDiv>
         <OrderButton onClick={onClick}>주문하기</OrderButton>
       </OrderDiv>

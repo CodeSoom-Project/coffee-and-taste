@@ -24,12 +24,14 @@ const MenuImage = styled.div(
 );
 
 const MenuName = styled.h1({
+  textAlign: 'center',
   fontSize: '1.7rem',
   fontWeight: '500',
   paddingBottom: '.5rem',
 });
 
 const MenuEnglishName = styled.h2({
+  textAlign: 'center',
   fontSize: '1.3rem',
   color: 'rgba(179, 179, 179)',
   paddingBottom: '.5rem',
@@ -43,24 +45,23 @@ const MenuDescription = styled.p({
 });
 
 const MenuPrice = styled.h3({
+  textAlign: 'right',
   margin: '10px 0',
-  fontSize: '1.7rem',
+  fontSize: '2rem',
   fontWeight: '500',
   padding: '1rem 0',
 });
 
 const MenuQuantity = styled.div({
   display: 'flex',
-  justifyContent: 'flex-start',
+  justifyContent: 'center',
   alignItems: 'center',
-  '& *': {
-    marginRight: '20px',
-  },
 });
 
 const Quantity = styled.span({
   fontSize: '2rem',
-  padding: '0.5rem 1rem',
+  padding: '0.5rem 2rem',
+  margin: '0 1rem',
 });
 
 const ButtonDiv = styled.div({

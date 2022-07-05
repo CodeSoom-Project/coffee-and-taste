@@ -75,29 +75,41 @@ const ButtonDiv = styled.div({
 });
 
 const OrderButton = styled.button({
-  padding: '0.5rem',
   width: '30%',
   height: '3rem',
+  padding: '0.5rem',
   fontSize: '1.5rem',
-  color: 'white',
-  borderRadius: '30px',
-  backgroundColor: '#006633',
+  color: '#00704a',
+  background: 'transparent',
+  border: '2px solid #00704a',
+  borderRadius: '5px',
   outline: 'none',
-  border: 'none',
   cursor: 'pointer',
+  transition: 'background-color .7s, color .7s',
+  '&:hover': {
+    color: '#fff',
+    backgroundColor: '#00704a',
+    textDecoration: 'underline',
+  },
 });
 
 const CartButton = styled.button({
-  padding: '0.5rem',
   width: '30%',
   height: '3rem',
+  padding: '0.5rem',
   fontSize: '1.5rem',
-  color: 'white',
-  borderRadius: '30px',
-  backgroundColor: '#006633',
+  color: '#00704a',
+  background: 'transparent',
+  border: '2px solid #00704a',
+  borderRadius: '5px',
   outline: 'none',
-  border: 'none',
   cursor: 'pointer',
+  transition: 'background-color .7s, color .7s',
+  '&:hover': {
+    color: '#fff',
+    backgroundColor: '#00704a',
+    textDecoration: 'underline',
+  },
 });
 
 export default function MenuDetail({

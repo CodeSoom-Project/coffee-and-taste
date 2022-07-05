@@ -10,15 +10,6 @@ const CategoryContainerStyle = styled.div({
   display: 'grid',
   gridTemplateColumns: 'repeat(3, 1fr)',
   justifyItems: 'center',
-  '& a': {
-    color: '#555555',
-    textDecoration: 'none',
-    transition: 'border-bottom .08s',
-    '&:hover': {
-      color: '#000',
-      borderBottom: '4px solid green',
-    },
-  },
 });
 
 const Category = styled.div(
@@ -27,9 +18,23 @@ const Category = styled.div(
     fontSize: '1.8rem',
     fontWeight: 'bold',
     '& a': {
-      ...(active && {
+      color: '#555555',
+      textDecoration: 'none',
+      '&:hover': {
+        color: '#000',
+        '&:after': {
+          transform: 'scaleX(1)',
+        },
+      },
+      '&:after': {
+        display: 'block',
+        content: '""',
         borderBottom: '4px solid green',
-      }),
+        ...(active || {
+          transform: 'scaleX(0)',
+          transition: 'transform 200ms ease-in-out',
+        }),
+      },
     },
   }),
 );

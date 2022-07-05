@@ -7,7 +7,9 @@ import thunk from 'redux-thunk';
 import { logger } from 'redux-logger';
 
 import {
+  deleteAllCartItems,
   deleteCartItem,
+  deleteSelectedCartItems,
   fetchCart,
   fetchCategories,
   fetchMenu,
@@ -329,6 +331,40 @@ export function requestRemoveCartItem(menuId) {
 
       if (responseStatus === 204) {
         alert('메뉴를 삭제했습니다.');
+        dispatch(loadCart());
+      }
+    } catch (err) {
+      // TODO : 에러 처리
+    }
+  };
+}
+
+export function requestDeleteSelectedCartItem() {
+  return async (dispatch, getState) => {
+    const { accessToken, checkedCartItems } = getState();
+
+    try {
+      const responseStatus = await deleteSelectedCartItems({ accessToken, checkedCartItems });
+
+      if (responseStatus === 204) {
+        alert('선택한 메뉴를 삭제했습니다.');
+        dispatch(loadCart());
+      }
+    } catch (err) {
+      // TODO : 에러 처리
+    }
+  };
+}
+
+export function requestDeleteAllCartItems() {
+  return async (dispatch, getState) => {
+    const { accessToken } = getState();
+
+    try {
+      const responseStatus = await deleteAllCartItems({ accessToken });
+
+      if (responseStatus === 204) {
+        alert('전체 메뉴를 삭제했습니다.');
         dispatch(loadCart());
       }
     } catch (err) {

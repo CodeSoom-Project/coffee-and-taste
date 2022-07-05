@@ -128,3 +128,32 @@ export async function deleteCartItem({ accessToken, menuId }) {
 
   return response.status;
 }
+
+export async function deleteSelectedCartItems({ accessToken, checkedCartItems }) {
+  const url = `${BASE_URL}/cart/cart-menus/`;
+  const response = await fetch(url, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify({
+      cartMenuIds: checkedCartItems,
+    }),
+  });
+
+  return response.status;
+}
+
+export async function deleteAllCartItems({ accessToken }) {
+  const url = `${BASE_URL}/cart/cart-menus/all`;
+  const response = await fetch(url, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
+  return response.status;
+}

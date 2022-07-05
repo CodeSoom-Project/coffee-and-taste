@@ -199,6 +199,8 @@ const OrderButton = styled.button({
 export default function Cart({
   cartMenus,
   checkedCartItems,
+  removeSelectedCartItems,
+  removeAllCartItems,
   onChange,
   onClick,
   removeCartItem,
@@ -231,9 +233,13 @@ export default function Cart({
       <CartTitle>장바구니</CartTitle>
       <hr />
       <RemoveButtonDiv>
-        <RemoveSelectedItemsButton>선택 삭제</RemoveSelectedItemsButton>
+        <RemoveSelectedItemsButton onClick={removeSelectedCartItems}>
+          선택 삭제
+        </RemoveSelectedItemsButton>
         <span>|</span>
-        <RemoveAllItemButton>전체 삭제</RemoveAllItemButton>
+        <RemoveAllItemButton onClick={removeAllCartItems}>
+          전체 삭제
+        </RemoveAllItemButton>
       </RemoveButtonDiv>
       {
         cartMenus.map(({

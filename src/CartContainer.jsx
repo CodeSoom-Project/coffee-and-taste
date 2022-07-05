@@ -11,6 +11,8 @@ import {
   clearCheckedCartItems,
   loadCart,
   removeUncheckedCartItem,
+  requestDeleteAllCartItems,
+  requestDeleteSelectedCartItem,
   requestOrder,
   requestRemoveCartItem,
   requestUpdateCartItemQuantity,
@@ -67,10 +69,24 @@ export default function CartContainer() {
       });
   };
 
+  const handleClickDeleteSelectedCartItems = () => {
+    if (window.confirm('선택한 메뉴를 삭제하시겠습니까?')) {
+      dispatch(requestDeleteSelectedCartItem());
+    }
+  };
+
+  const handleClickDeleteAllCartItems = () => {
+    if (window.confirm('전체 메뉴를 삭제하시겠습니까?')) {
+      dispatch(requestDeleteAllCartItems());
+    }
+  };
+
   return (
     <Cart
       cartMenus={cartMenus}
       checkedCartItems={checkedCartItems}
+      removeSelectedCartItems={handleClickDeleteSelectedCartItems}
+      removeAllCartItems={handleClickDeleteAllCartItems}
       onChange={handleChange}
       onClick={handleClickOrder}
       removeCartItem={handleClickRemoveCartItem}

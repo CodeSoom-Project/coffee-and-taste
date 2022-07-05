@@ -6,9 +6,8 @@ import { Link, useLocation } from 'react-router-dom';
 
 const CategoryContainerStyle = styled.div({
   margin: '0 auto',
-  width: '40%',
+  width: '50%',
   display: 'grid',
-  background: 'beige 100%',
   gridTemplateColumns: 'repeat(3, 1fr)',
   justifyItems: 'center',
   '& a': {

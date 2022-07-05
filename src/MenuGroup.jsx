@@ -14,6 +14,10 @@ const MenuGroupImage = styled.div(
     borderRadius: '50%',
     width: '150px',
     height: '150px',
+    '&:hover': {
+      transform: 'scale(1.1, 1.1)',
+      transition: '.5s',
+    },
   },
   ({ url }) => (url ? ({
     background: `url("https://coffee-and-taste.kro.kr${url}") center/100% no-repeat`,
@@ -21,6 +25,7 @@ const MenuGroupImage = styled.div(
     border: '2px solid green',
     backgroundColor: '#1E3932',
   })),
+
 );
 
 const MenuGroupName = styled.div({

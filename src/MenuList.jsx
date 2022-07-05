@@ -11,6 +11,10 @@ const MenuImage = styled.div(
     borderRadius: '50%',
     width: '150px',
     height: '150px',
+    '&:hover': {
+      transform: 'scale(1.1, 1.1)',
+      transition: '.5s',
+    },
     ...(url && {
       background: `url("https://coffee-and-taste.kro.kr${url}") center/100% no-repeat`,
     }),

@@ -23,17 +23,10 @@ const MenuImage = styled.div({
 
 const MenuName = styled.div({
   margin: '10px 0',
-  fontSize: '16px',
+  fontSize: '1.1rem',
+  color: '#555555',
   textAlign: 'center',
   wordBreak: 'keep-all',
-  '& a': {
-    fontSize: '1.1rem',
-    color: '#555555',
-    textDecoration: 'none',
-    '&:hover': {
-      color: '#000',
-    },
-  },
 });
 
 const NoMenu = styled.h1({
@@ -57,12 +50,12 @@ export default function MenuList({ menus, menuGroupId, selectedCategory }) {
         menus.map(({ id, imagePath, name }) => (
           <Menu key={name}>
             <MenuImage>
-              <img src={`https://coffee-and-taste.kro.kr${imagePath}`} alt={name} />
+              <Link to={`/menu-groups/${menuGroupId}/menus/${id}`} state={{ categoryId: selectedCategory }}>
+                <img src={`https://coffee-and-taste.kro.kr${imagePath}`} alt={name} />
+              </Link>
             </MenuImage>
             <MenuName>
-              <Link to={`/menu-groups/${menuGroupId}/menus/${id}`} state={{ categoryId: selectedCategory }}>
-                {name}
-              </Link>
+              {name}
             </MenuName>
           </Menu>
         ))

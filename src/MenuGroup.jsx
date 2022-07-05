@@ -36,15 +36,9 @@ const MenuGroupNoImage = styled.div(
 
 const MenuGroupName = styled.div({
   margin: '10px 0',
+  fontSize: '1.1rem',
+  color: '#555555',
   textAlign: 'center',
-  '& a': {
-    fontSize: '1.3rem',
-    color: '#555555',
-    textDecoration: 'none',
-    '&:hover': {
-      color: '#000',
-    },
-  },
 });
 
 export default function MenuGroup({ menuGroups, selectedCategory }) {
@@ -56,16 +50,16 @@ export default function MenuGroup({ menuGroups, selectedCategory }) {
             {
               representativeImagePath ? (
                 <MenuGroupImage>
-                  <img src={`https://coffee-and-taste.kro.kr${representativeImagePath}`} alt={name} />
+                  <Link to={`/menu-groups/${id}`} state={{ categoryId: selectedCategory }}>
+                    <img src={`https://coffee-and-taste.kro.kr${representativeImagePath}`} alt={name} />
+                  </Link>
                 </MenuGroupImage>
               ) : (
                 <MenuGroupNoImage />
               )
             }
             <MenuGroupName>
-              <Link to={`/menu-groups/${id}`} state={{ categoryId: selectedCategory }}>
-                {name}
-              </Link>
+              {name}
             </MenuGroupName>
           </div>
         ))

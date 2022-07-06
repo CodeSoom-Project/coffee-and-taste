@@ -58,7 +58,7 @@ const MenuQuantity = styled.div(
     '& svg': {
       cursor: 'pointer',
     },
-    '& svg:first-child': {
+    '& svg:first-of-type': {
       ...(active && {
         opacity: '0.3',
         cursor: 'not-allowed',

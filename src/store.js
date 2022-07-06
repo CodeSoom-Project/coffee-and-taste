@@ -320,7 +320,10 @@ export function requestRemoveCartItem(menuId) {
 
       if (responseStatus === 204) {
         alert('메뉴를 삭제했습니다.');
-        dispatch(loadCart());
+        dispatch(clearCheckedCartItems())
+          .then(
+            dispatch(loadCart()),
+          );
       }
     } catch (err) {
       // TODO : 에러 처리

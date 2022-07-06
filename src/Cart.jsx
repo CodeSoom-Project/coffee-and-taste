@@ -86,17 +86,17 @@ const CartItem = styled.div({
   gridTemplateColumns: '30% auto',
 });
 
-const CartItemImage = styled.div(
-  ({ url }) => ({
-    margin: '10px auto',
-    borderRadius: '50%',
-    width: '100px',
-    height: '100px',
-    ...(url && {
-      background: `url("https://coffee-and-taste.kro.kr${url}") center/100% no-repeat`,
-    }),
-  }),
-);
+const CartItemImage = styled.div({
+  width: '100px',
+  height: '100px',
+  margin: '10px auto',
+  overflow: 'hidden',
+  borderRadius: '50%',
+  '& img': {
+    width: '100%',
+    height: '100%',
+  },
+});
 
 const CartItemInfo = styled.div({
   display: 'flex',
@@ -289,7 +289,9 @@ export default function Cart({
                   />
                 </CartButtonGroup>
                 <CartItem>
-                  <CartItemImage url={imagePath} />
+                  <CartItemImage>
+                    <img src={`https://coffee-and-taste.kro.kr${imagePath}`} alt={name} />
+                  </CartItemImage>
                   <CartItemInfo>
                     <ItemName>{name}</ItemName>
                     <ItemEnglishName>{englishName}</ItemEnglishName>

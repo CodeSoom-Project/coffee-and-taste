@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 
 import { BsFillDashCircleFill, BsPlusCircleFill } from 'react-icons/bs';
 import { VscClose } from 'react-icons/vsc';
+import { Link } from 'react-router-dom';
 
 const CartContainerStyle = styled.div({
   width: '800px',
@@ -290,7 +291,9 @@ export default function Cart({
                 </CartButtonGroup>
                 <CartItem>
                   <CartItemImage>
-                    <img src={`https://coffee-and-taste.kro.kr${imagePath}`} alt={name} />
+                    <Link to={`/menus/${id}`}>
+                      <img src={`https://coffee-and-taste.kro.kr${imagePath}`} alt={name} />
+                    </Link>
                   </CartItemImage>
                   <CartItemInfo>
                     <ItemName>{name}</ItemName>

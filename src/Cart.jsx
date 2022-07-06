@@ -197,23 +197,36 @@ const OrderDiv = styled.div({
   margin: '3rem 0',
 });
 
-const OrderButton = styled.button({
-  width: '30%',
-  height: '3rem',
-  color: '#00704a',
-  fontSize: '1.3rem',
-  borderRadius: '30px',
-  background: 'transparent',
-  border: '2px solid #00704a',
-  outline: 'none',
-  cursor: 'pointer',
-  transition: 'background-color .7s, color .7s',
-  '&:hover': {
-    color: '#fff',
-    backgroundColor: '#00704a',
-    textDecoration: 'underline',
-  },
-});
+const OrderButton = styled.button(
+  ({ active }) => ({
+    width: '30%',
+    height: '3rem',
+    fontSize: '1.3rem',
+    borderRadius: '30px',
+    transition: 'background-color .7s, color .3s',
+    ...(active
+      ? {
+        color: '#00704a',
+        cursor: 'pointer',
+        background: 'transparent',
+        border: '2px solid #00704a',
+        '&:hover': {
+          color: '#fff',
+          backgroundColor: '#00704a',
+          textDecoration: 'underline',
+        },
+
+      }
+      : {
+        color: '#fff',
+        cursor: 'not-allowed',
+        background: '#E9E9ED',
+        border: '2px solid #fff',
+      }
+    ),
+  }),
+
+);
 
 export default function Cart({
   cartMenus,
@@ -347,7 +360,12 @@ export default function Cart({
         </TotalPriceDiv>
       </TotalQuantityAndPriceDiv>
       <OrderDiv>
-        <OrderButton onClick={onClick}>주문하기</OrderButton>
+        <OrderButton
+          onClick={onClick}
+          active={totalQuantity !== 0}
+        >
+          주문하기
+        </OrderButton>
       </OrderDiv>
     </CartContainerStyle>
   );

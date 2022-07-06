@@ -2,8 +2,6 @@ import { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { useNavigate } from 'react-router-dom';
-
 import {
   addCheckedCartItem,
   cartMenuQuantityMinusOne,
@@ -20,11 +18,8 @@ import {
 
 import Cart from './Cart';
 
-import { CURRENT_PAGE_RELOAD } from './constants';
-
 export default function CartContainer() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const cartMenus = useSelector((state) => state.cartMenus);
   const checkedCartItems = useSelector((state) => state.checkedCartItems);
@@ -68,10 +63,7 @@ export default function CartContainer() {
 
   const handleClickUpdateItemQuantity = (menuId) => {
     if (window.confirm('주문 수량을 변경하시겠습니까?')) {
-      dispatch(requestUpdateCartItemQuantity(menuId))
-        .then(() => {
-          navigate(CURRENT_PAGE_RELOAD);
-        });
+      dispatch(requestUpdateCartItemQuantity(menuId));
     }
   };
 

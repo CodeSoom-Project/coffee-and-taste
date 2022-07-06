@@ -304,6 +304,10 @@ export function requestUpdateCartItemQuantity(menuId) {
       const data = await patchCartItemQuantity({ accessToken, menuId, quantity });
       if (data) {
         alert('수량을 변경하였습니다.');
+        dispatch(clearCheckedCartItems())
+          .then(
+            dispatch(loadCart()),
+          );
       }
     } catch (err) {
       // TODO : 에러 처리

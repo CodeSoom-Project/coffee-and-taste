@@ -67,10 +67,12 @@ export default function CartContainer() {
   };
 
   const handleClickUpdateItemQuantity = (menuId) => {
-    dispatch(requestUpdateCartItemQuantity(menuId))
-      .then(() => {
-        navigate(CURRENT_PAGE_RELOAD);
-      });
+    if (window.confirm('주문 수량을 변경하시겠습니까?')) {
+      dispatch(requestUpdateCartItemQuantity(menuId))
+        .then(() => {
+          navigate(CURRENT_PAGE_RELOAD);
+        });
+    }
   };
 
   const handleClickDeleteSelectedCartItems = () => {

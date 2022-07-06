@@ -57,7 +57,10 @@ export default function CartContainer() {
     dispatch(cartMenuQuantityPlusOne(menuId));
   };
 
-  const handleClickQuantityMinusOne = (menuId) => {
+  const handleClickQuantityMinusOne = (menuId, currentQuantity) => {
+    if (currentQuantity === 1) {
+      return;
+    }
     dispatch(cartMenuQuantityMinusOne(menuId));
   };
 

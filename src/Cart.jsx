@@ -325,7 +325,7 @@ export default function Cart({
                     <ItemQuantityUl>
                       <ItemQuantityLi active={quantity === 1}>
                         <BsFillDashCircleFill
-                          onClick={() => decreaseQuantityOne(id)}
+                          onClick={() => decreaseQuantityOne(id, quantity)}
                         />
                       </ItemQuantityLi>
                       <ItemQuantityLi>

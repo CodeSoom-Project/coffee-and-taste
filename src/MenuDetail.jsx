@@ -145,7 +145,7 @@ export default function MenuDetail({
         원
       </MenuPrice>
       <MenuQuantity active={menuQuantity === 1}>
-        <BsFillDashCircleFill size="40" onClick={onClickDecreaseQuantity} />
+        <BsFillDashCircleFill size="40" onClick={() => onClickDecreaseQuantity(menuQuantity)} />
         <Quantity>{menuQuantity}</Quantity>
         <BsPlusCircleFill size="40" onClick={onClickIncreaseQuantity} />
       </MenuQuantity>

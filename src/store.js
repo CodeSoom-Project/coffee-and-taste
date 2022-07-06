@@ -494,7 +494,7 @@ function reducer(state = initialState, action = {}) {
 
   if (action.type === MENU_QUANTITY_MINUS_ONE) {
     if ((state.menuQuantity - 1) < 1) {
-      alert('최소 주문 수량은 1개입니다.');
+      // alert('최소 주문 수량은 1개입니다.');
       return state;
     }
 
@@ -531,7 +531,7 @@ function reducer(state = initialState, action = {}) {
       cartMenus: state.cartMenus.map((menu) => {
         if (menu.id === menuId) {
           if ((menu.quantity - 1) < 1) {
-            alert('수량은 1보다 작을 수 없습니다.');
+            // alert('수량은 1보다 작을 수 없습니다.');
             return menu;
           }
           return ({ ...menu, quantity: menu.quantity - 1 });

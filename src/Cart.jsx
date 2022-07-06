@@ -248,6 +248,10 @@ export default function Cart({
     onChange({ checked, value });
   };
 
+  const alertNoQuantityToOrder = () => {
+    alert('주문할 메뉴를 먼저 선택해주세요.');
+  };
+
   if (cartMenus.length === 0) {
     return (
       <CartContainerStyle>
@@ -361,8 +365,8 @@ export default function Cart({
       </TotalQuantityAndPriceDiv>
       <OrderDiv>
         <OrderButton
-          onClick={onClick}
           active={totalQuantity !== 0}
+          onClick={totalQuantity ? onClick : alertNoQuantityToOrder}
         >
           주문하기
         </OrderButton>

@@ -53,7 +53,9 @@ export default function CartContainer() {
   };
 
   const handleClickOrder = () => {
-    dispatch(requestOrder());
+    if (window.confirm('선택한 메뉴를 주문하시겠습니까?')) {
+      dispatch(requestOrder());
+    }
   };
 
   const handleClickQuantityPlusOne = (menuId) => {

@@ -71,7 +71,7 @@ export default function CartContainer() {
   };
 
   const handleClickDeleteSelectedCartItems = (totalQuantity) => {
-    if (totalQuantity === 0) {
+    if (!totalQuantity) {
       alert('삭제할 메뉴를 먼저 선택해주세요.');
       return;
     }

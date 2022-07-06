@@ -252,7 +252,7 @@ export default function Cart({
     alert('주문할 메뉴를 먼저 선택해주세요.');
   };
 
-  if (cartMenus.length === 0) {
+  if (!cartMenus.length) {
     return (
       <CartContainerStyle>
         <CartTitle>장바구니</CartTitle>
@@ -368,7 +368,7 @@ export default function Cart({
       </TotalQuantityAndPriceDiv>
       <OrderDiv>
         <OrderButton
-          active={totalQuantity !== 0}
+          active={totalQuantity > 0}
           onClick={totalQuantity ? onClick : alertNoQuantityToOrder}
         >
           주문하기

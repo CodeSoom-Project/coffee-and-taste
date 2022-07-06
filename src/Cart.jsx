@@ -248,10 +248,6 @@ export default function Cart({
     onChange({ checked, value });
   };
 
-  const alertNotSelectedItemToDelete = () => {
-    alert('삭제할 메뉴를 먼저 선택해주세요.');
-  };
-
   const alertNoQuantityToOrder = () => {
     alert('주문할 메뉴를 먼저 선택해주세요.');
   };
@@ -274,7 +270,7 @@ export default function Cart({
       <hr />
       <RemoveButtonDiv>
         <RemoveSelectedItemsButton
-          onClick={totalQuantity ? removeSelectedCartItems : alertNotSelectedItemToDelete}
+          onClick={() => removeSelectedCartItems(totalQuantity)}
         >
           선택 삭제
         </RemoveSelectedItemsButton>

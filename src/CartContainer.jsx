@@ -75,7 +75,12 @@ export default function CartContainer() {
     }
   };
 
-  const handleClickDeleteSelectedCartItems = () => {
+  const handleClickDeleteSelectedCartItems = (totalQuantity) => {
+    if (totalQuantity === 0) {
+      alert('삭제할 메뉴를 먼저 선택해주세요.');
+      return;
+    }
+
     if (window.confirm('선택한 메뉴를 삭제하시겠습니까?')) {
       dispatch(requestDeleteSelectedCartItem());
     }

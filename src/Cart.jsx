@@ -287,7 +287,7 @@ export default function Cart({
         cartMenus.map(({
           id,
           menu: {
-            name, englishName, price, imagePath,
+            id: menuId, name, englishName, price, imagePath,
           },
           quantity,
         }) => {
@@ -314,7 +314,7 @@ export default function Cart({
                 </CartButtonGroup>
                 <CartItem>
                   <CartItemImage>
-                    <Link to={`/menus/${id}`}>
+                    <Link to={`/menus/${menuId}`}>
                       <img src={`https://coffee-and-taste.kro.kr${imagePath}`} alt={name} />
                     </Link>
                   </CartItemImage>

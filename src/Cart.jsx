@@ -301,6 +301,7 @@ export default function Cart({
                     name="menuId"
                     value={id}
                     onChange={handleChange}
+                    checked={checkedCartItems.includes(String(id))}
                   />
                   <VscClose
                     size="30"

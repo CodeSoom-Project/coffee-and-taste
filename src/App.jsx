@@ -29,7 +29,7 @@ import logo from './images/logo.png';
 
 const Container = styled.div({
   margin: '0 auto',
-  width: '70%',
+  width: '1100px',
 });
 
 const Header = styled.header({
@@ -50,8 +50,7 @@ const Logo = styled.img({
 });
 
 const ContentContainer = styled.div({
-  marginTop: '50px',
-  height: 'auto',
+
 });
 
 export default function App() {
@@ -69,27 +68,55 @@ export default function App() {
 
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
-      <Header>
-        <SignContainer />
-        <LogoContainer>
-          <Link to="/">
-            <Logo src={logo} alt="coffee-and-taste logo" />
-          </Link>
-        </LogoContainer>
-        <CategoryContainer />
-      </Header>
-      <Container>
-        <ContentContainer>
-          <Routes>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/signUp" element={<SignUpContainer />} />
-            <Route path="/cart" element={<CartContainer />} />
-            <Route path="/categories/:categoryId" element={<MenuGroupContainer />} />
-            <Route path="/menu-groups/:menuGroupId" element={<MenuListContainer />} />
-            <Route path="/menus/:menuId" element={<MenuDetailContainer />} />
-          </Routes>
-        </ContentContainer>
-      </Container>
+      <div
+        className="wrapper"
+        style={{
+          position: 'relative',
+        }}
+      >
+        <div
+          className="topWrap"
+          style={{
+            position: 'relative',
+            height: '250px',
+          }}
+        >
+          <Header style={{
+            position: 'fixed',
+            zIndex: '99',
+            top: 0,
+            left: 0,
+          }}
+          >
+            <SignContainer />
+            <LogoContainer>
+              <Link to="/">
+                <Logo src={logo} alt="coffee-and-taste logo" />
+              </Link>
+            </LogoContainer>
+            <CategoryContainer />
+          </Header>
+        </div>
+        <Container style={{
+
+        }}
+        >
+          <ContentContainer style={{
+            position: 'relative',
+            height: '100%',
+          }}
+          >
+            <Routes>
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/signUp" element={<SignUpContainer />} />
+              <Route path="/cart" element={<CartContainer />} />
+              <Route path="/categories/:categoryId" element={<MenuGroupContainer />} />
+              <Route path="/menu-groups/:menuGroupId" element={<MenuListContainer />} />
+              <Route path="/menus/:menuId" element={<MenuDetailContainer />} />
+            </Routes>
+          </ContentContainer>
+        </Container>
+      </div>
     </BrowserRouter>
   );
 }

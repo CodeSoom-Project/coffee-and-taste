@@ -33,7 +33,7 @@ const TopWrap = styled.div({
 
 const Header = styled.header({
   position: 'fixed',
-  zIndex: '99',
+  zIndex: '1',
   top: 0,
   left: 0,
   width: '100%',

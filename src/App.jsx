@@ -57,11 +57,6 @@ const Container = styled.div({
   width: '1100px',
 });
 
-const ContentContainer = styled.div({
-  position: 'relative',
-  height: '100%',
-});
-
 export default function App() {
   const dispatch = useDispatch();
 
@@ -89,16 +84,14 @@ export default function App() {
         </Header>
       </TopWrap>
       <Container>
-        <ContentContainer>
-          <Routes>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/signUp" element={<SignUpContainer />} />
-            <Route path="/cart" element={<CartContainer />} />
-            <Route path="/categories/:categoryId" element={<MenuGroupContainer />} />
-            <Route path="/menu-groups/:menuGroupId" element={<MenuListContainer />} />
-            <Route path="/menus/:menuId" element={<MenuDetailContainer />} />
-          </Routes>
-        </ContentContainer>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signUp" element={<SignUpContainer />} />
+          <Route path="/cart" element={<CartContainer />} />
+          <Route path="/categories/:categoryId" element={<MenuGroupContainer />} />
+          <Route path="/menu-groups/:menuGroupId" element={<MenuListContainer />} />
+          <Route path="/menus/:menuId" element={<MenuDetailContainer />} />
+        </Routes>
       </Container>
     </BrowserRouter>
   );

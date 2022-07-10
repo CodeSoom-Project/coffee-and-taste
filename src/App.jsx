@@ -53,7 +53,7 @@ const Logo = styled.img({
 });
 
 const Container = styled.div({
-  margin: '0 auto',
+  margin: '50px auto 0 auto',
   width: '1100px',
 });
 

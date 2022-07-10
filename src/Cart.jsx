@@ -228,6 +228,19 @@ const OrderButton = styled.button(
 
 );
 
+const SelectAllItemsCheckboxDiv = styled.div({
+  display: 'flex',
+  alignItems: 'center',
+  '& span': {
+    fontSize: '1.2rem',
+  },
+});
+
+const SelectAllItemsCheckbox = styled.input({
+  width: '30px',
+  height: '30px',
+});
+
 export default function Cart({
   cartMenus,
   checkedCartItems,
@@ -268,7 +281,12 @@ export default function Cart({
     <CartContainerStyle>
       <CartTitle>장바구니</CartTitle>
       <hr />
+      <SelectAllItemsCheckboxDiv>
+        <SelectAllItemsCheckbox type="checkbox" />
+        <span>전체 선택</span>
+      </SelectAllItemsCheckboxDiv>
       <RemoveButtonDiv>
+
         <RemoveSelectedItemsButton
           onClick={() => removeSelectedCartItems(totalQuantity)}
         >

@@ -20,6 +20,7 @@ export default function MenuDetailContainer() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const accessToken = useSelector((state) => state.accessToken);
   const menuQuantity = useSelector((state) => state.menuQuantity);
 
   useEffect(() => {
@@ -31,6 +32,12 @@ export default function MenuDetailContainer() {
   }, []);
 
   const handleClickAddToCart = () => {
+    if (!accessToken) {
+      alert('로그인이 필요한 서비스입니다.');
+      navigate('/login');
+      return;
+    }
+
     dispatch(requestAddToCart())
       .then(
         () => navigate('/cart'),

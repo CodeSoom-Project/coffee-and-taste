@@ -257,9 +257,8 @@ export default function Cart({
   let totalPayment = 0;
   let totalQuantity = 0;
 
-  const handleChange = (event) => {
-    const { checked, value } = event.target;
-    onChange({ isChecked: checked, checkedItemId: Number(value) });
+  const handleChange = (isChecked, checkedItemId) => {
+    onChange({ isChecked, checkedItemId });
   };
 
   const alertNoQuantityToOrder = () => {
@@ -326,7 +325,7 @@ export default function Cart({
                     type="checkbox"
                     name="menuId"
                     value={id}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e.target.checked, id)}
                     checked={checkedCartItems.includes(id)}
                   />
                   <VscClose

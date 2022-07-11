@@ -252,13 +252,14 @@ export default function Cart({
   increaseQuantityOne,
   decreaseQuantityOne,
   updateItemQuantity,
+  checkOrUncheckAllItems,
 }) {
   let totalPayment = 0;
   let totalQuantity = 0;
 
   const handleChange = (event) => {
     const { checked, value } = event.target;
-    onChange({ checked, value });
+    onChange({ isChecked: checked, checkedItemId: Number(value) });
   };
 
   const alertNoQuantityToOrder = () => {
@@ -282,7 +283,14 @@ export default function Cart({
       <CartTitle>장바구니</CartTitle>
       <hr />
       <SelectAllItemsCheckboxDiv>
-        <SelectAllItemsCheckbox type="checkbox" />
+        <SelectAllItemsCheckbox
+          type="checkbox"
+          checked={
+            checkedCartItems.length === 0 ? false
+              : checkedCartItems.length === cartMenus.length
+          }
+          onChange={(e) => checkOrUncheckAllItems(e.target.checked, cartMenus)}
+        />
         <span>전체 선택</span>
       </SelectAllItemsCheckboxDiv>
       <RemoveButtonDiv>
@@ -305,7 +313,7 @@ export default function Cart({
           },
           quantity,
         }) => {
-          if (checkedCartItems.includes(String(id))) {
+          if (checkedCartItems.includes(id)) {
             totalPayment += (price * quantity);
             totalQuantity += quantity;
           }
@@ -319,7 +327,7 @@ export default function Cart({
                     name="menuId"
                     value={id}
                     onChange={handleChange}
-                    checked={checkedCartItems.includes(String(id))}
+                    checked={checkedCartItems.includes(id)}
                   />
                   <VscClose
                     size="30"

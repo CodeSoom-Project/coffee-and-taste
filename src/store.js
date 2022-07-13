@@ -275,10 +275,13 @@ export function requestOrder() {
     const { accessToken, checkedCartItems } = getState();
 
     try {
-      await postOrder({ accessToken, checkedCartItems });
+      const data = await postOrder({ accessToken, checkedCartItems });
 
-      dispatch(clearCheckedCartItems());
-      dispatch(loadCart());
+      if (data) {
+        alert('주문이 완료되었습니다.');
+        dispatch(clearCheckedCartItems());
+        dispatch(loadCart());
+      }
     } catch (e) {
       // TODO : 에러 처리
     }

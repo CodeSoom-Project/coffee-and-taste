@@ -43,10 +43,12 @@ export default function MenuDetailContainer() {
       return;
     }
 
-    dispatch(requestAddToCart())
-      .then(
-        () => navigate('/cart'),
-      );
+    if (window.confirm('이 메뉴를 장바구니에 담으시겠습니까?')) {
+      dispatch(requestAddToCart())
+        .then(
+          () => navigate('/cart'),
+        );
+    }
   };
 
   const handleClickPlusOne = () => {

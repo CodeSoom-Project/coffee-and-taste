@@ -20,7 +20,7 @@ import {
   postLogin,
   postOrder,
   postSignUp,
-  getLoggedUserInfo,
+  getLoggedUserInfo, postSingleOrder,
 } from './services/api';
 
 import { saveItem } from './services/localStorage';
@@ -279,6 +279,22 @@ export function requestOrder() {
 
       dispatch(clearCheckedCartItems());
       dispatch(loadCart());
+    } catch (e) {
+      // TODO : 에러 처리
+    }
+  };
+}
+
+export function requestSingleOrder() {
+  return async (dispatch, getState) => {
+    const { accessToken, menu: { id: menuId }, menuQuantity: quantity } = getState();
+
+    try {
+      const data = await postSingleOrder({ accessToken, menuId, quantity });
+
+      if (data) {
+        alert('주문이 완료되었습니다.');
+      }
     } catch (e) {
       // TODO : 에러 처리
     }

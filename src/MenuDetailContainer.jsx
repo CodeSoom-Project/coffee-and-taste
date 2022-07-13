@@ -67,7 +67,11 @@ export default function MenuDetailContainer() {
       return;
     }
     // TODO : 장바구니에 담지 않고 바로 주문하기
-    dispatch(requestSingleOrder());
+    if (window.confirm('주문하시겠습니까?')) {
+      dispatch(requestSingleOrder()).then(
+        () => navigate('/'),
+      );
+    }
   };
 
   const menu = useSelector((state) => state.menu);
